@@ -4,6 +4,7 @@ import com.project.board.domain.board.controller.request.ListParam;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.board.service.BoardService;
+import com.project.board.domain.choiceBoard.repository.ChoiceBoardRepository;
 import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.repository.MemberRepository;
 import com.project.board.domain.reply.repository.ReplyRepository;
@@ -24,14 +25,7 @@ public class MemberService {
     private final BoardRepository boardRepository;
     private final BoardService boardService;
     private final ReplyRepository replyRepository;
-    //찜 기능 구현
-    public void choiceBoard(Long boardId, Member member) {
-        memberRepository
-                .findByUsername(member.getUsername())
-                .orElseThrow()
-                .choiceBoard(boardId);
-    }
-
+    private final ChoiceBoardRepository choiceBoardRepository;
     //정보를 수집
     public void collectInfo(
             Member member
@@ -56,7 +50,10 @@ public class MemberService {
                 .findByMember(member)
                 .stream()
                 .forEach(reply -> { replyRepository.delete(reply);});
-
+        choiceBoardRepository
+                .findChoiceBoardListByMember(member)
+                .stream()
+                .forEach(choiceBoard -> {choiceBoardRepository.delete(choiceBoard);});
         boardRepository
                 .findBoardByMember(member)
                 .stream()

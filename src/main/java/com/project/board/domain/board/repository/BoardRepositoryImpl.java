@@ -2,6 +2,7 @@ package com.project.board.domain.board.repository;
 
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.domain.Board;
+import com.project.board.domain.choiceBoard.domain.QChoiceBoard;
 import com.project.board.domain.member.domain.Member;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.project.board.domain.board.domain.QBoard.board;
+import static com.project.board.domain.choiceBoard.domain.QChoiceBoard.*;
 import static com.project.board.domain.member.domain.QMember.member;
 import static org.apache.logging.log4j.util.Strings.isEmpty;
 
@@ -137,17 +139,17 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     }
     @Override
     public Page<Board> searchByChoice(Member user, BoardSearchCondition searchCondition, Pageable pageable) {
-
         List<Board> result = queryFactory
                 .select(board)
                 .from(board)
+                .join(choiceBoard).on(board.id.eq(choiceBoard.board.id))
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
-                        , board.id.in(user.getChoiceBoard())
+                        , choiceBoard.member.eq(user)
                 )
                 .orderBy(boardSort(pageable))
                 .offset(pageable.getOffset())
@@ -157,13 +159,14 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         JPAQuery<Long> CountQuery = queryFactory
                 .select(board.count())
                 .from(board)
+                .join(choiceBoard).on(board.id.eq(choiceBoard.board.id))
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
-                        , board.id.in(user.getChoiceBoard())
+                        , choiceBoard.member.eq(user)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

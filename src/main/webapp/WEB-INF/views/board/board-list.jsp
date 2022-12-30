@@ -309,7 +309,7 @@
             .then(checkedIdList => {
                 for (let boardId of [...checkedIdList]) {
                     let board = document.getElementById(boardId);
-                    board.checked = true;
+                    if(board != null) board.checked = true;
                 }
             })
     }

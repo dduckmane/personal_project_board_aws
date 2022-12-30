@@ -4,6 +4,7 @@ import com.project.board.domain.board.domain.Address;
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.domain.UploadFile;
 import com.project.board.domain.board.repository.BoardRepository;
+import com.project.board.domain.choiceBoard.repository.ChoiceBoardRepository;
 import com.project.board.domain.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import java.util.Optional;
 @Slf4j
 public class BoardService {
     private final BoardRepository boardRepository;
+    private final ChoiceBoardRepository choiceBoardRepository;
 
     @Transactional
     public Long save(
@@ -75,6 +77,11 @@ public class BoardService {
     @Transactional
     public void delete(Long boardId){
         Board board = boardRepository.findById(boardId).orElseThrow();
+
+        choiceBoardRepository.findByBoard(board).stream().forEach(choiceBoard -> {
+            choiceBoardRepository.delete(choiceBoard);
+        });
+
         boardRepository.delete(board);
     }
     @Transactional

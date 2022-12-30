@@ -30,9 +30,6 @@ public class Member extends BaseTimeEntity {
             ,cascade = CascadeType.ALL)
     private List <Reply> replies=new ArrayList<>();
 
-    @ElementCollection
-    private List <Long> choiceBoard=new ArrayList<>();
-
     @OneToOne(mappedBy = "member"
             , fetch = FetchType.LAZY
             ,orphanRemoval = true
@@ -45,9 +42,6 @@ public class Member extends BaseTimeEntity {
     public void addSearchInfo(SearchInfo searchInfo){
         this.searchInfo=searchInfo;
     }
-
-
-
     @Builder
     public Member(
             String name
@@ -67,15 +61,4 @@ public class Member extends BaseTimeEntity {
         this.providerId = providerId;
     }
 
-    //board 를 한번 누르면 리스트에 담기고 두번 누르면 제거
-    public void choiceBoard(Long boardId) {
-        Long findBoardId = choiceBoard
-                .stream()
-                .filter(id -> id == boardId).
-                findFirst()
-                .orElse(null);
-
-        if(findBoardId==null) choiceBoard.add(boardId);
-        else choiceBoard.remove(boardId);
-    }
 }
