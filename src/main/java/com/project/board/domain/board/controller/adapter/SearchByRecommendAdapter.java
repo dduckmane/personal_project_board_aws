@@ -66,6 +66,6 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
                 .map(RecommendListDto::getBoard)
                 .collect(Collectors.toList());
 
-        return new PageImpl<>(result,pageable,boards.getTotalElements());
+        return new PageImpl<>(result,pageable,result.size());
     }
 }
