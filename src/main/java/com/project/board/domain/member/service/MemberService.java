@@ -6,6 +6,8 @@ import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.board.service.BoardService;
 import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.repository.MemberRepository;
+import com.project.board.domain.reply.repository.ReplyRepository;
+import com.project.board.domain.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ public class MemberService {
     private final SearchInfoService searchInfoService;
     private final BoardRepository boardRepository;
     private final BoardService boardService;
+    private final ReplyRepository replyRepository;
     //찜 기능 구현
     public void choiceBoard(Long boardId, Member member) {
         memberRepository
@@ -49,6 +52,11 @@ public class MemberService {
     }
 
     public void withdrawal(Member member){
+        replyRepository
+                .findByMember(member)
+                .stream()
+                .forEach(reply -> { replyRepository.delete(reply);});
+
         boardRepository
                 .findBoardByMember(member)
                 .stream()
