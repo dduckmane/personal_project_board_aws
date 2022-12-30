@@ -190,13 +190,15 @@
 
 <!-- 리스트 시작 -->
 <section id="boardList">
-    <c:if test="${Param eq 'recommend'}">
+    <div id="param" class="d-none">${Param}</div>
+
+    <div id="explain" style="display: none">
         <c:if test="${fn:length(BoardDtoList)==0}">
             <div class="container">
                 <h3 class="fw-lighter">😭 회원님의 검색이나 필터 사용을 통해 수집된 정보가 부족하여 아직 추천을 드리지 못합니다 😭</h3>
             </div>
         </c:if>
-    </c:if>
+    </div>
     <div class="row">
         <c:forEach var="item" varStatus="status" items="${BoardDtoList}">
             <div class="col-md-3 col-sm-6 p-0">
@@ -252,6 +254,13 @@
 <!-- footer 종료 -->
 
 <script>
+    function checkEmpty(){
+        let param = document.getElementById('param').textContent;
+        if(param === 'recommend') {
+            let explain = document.getElementById('explain');
+            explain.style.display='block';
+        }
+    }
     function showImage() {
         const $thumbList = document.querySelectorAll('img[data-item-id]');
         for (let $thumb of [...$thumbList]) {
@@ -333,6 +342,7 @@
         }
     }
     (function () {
+        checkEmpty();
         choiceBoard();
         showImage();
         checkedChoiceButton();
