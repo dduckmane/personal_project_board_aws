@@ -28,10 +28,10 @@ public class Member extends BaseTimeEntity {
             , fetch = FetchType.LAZY
             ,orphanRemoval = true
             ,cascade = CascadeType.ALL)
-    List <Reply> replies=new ArrayList<>();
+    private List <Reply> replies=new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    List<Long> choiceBoard=new ArrayList<>();
+    @ElementCollection
+    private List <Long> choiceBoard=new ArrayList<>();
 
     @OneToOne(mappedBy = "member"
             , fetch = FetchType.LAZY
@@ -45,6 +45,8 @@ public class Member extends BaseTimeEntity {
     public void addSearchInfo(SearchInfo searchInfo){
         this.searchInfo=searchInfo;
     }
+
+
 
     @Builder
     public Member(
