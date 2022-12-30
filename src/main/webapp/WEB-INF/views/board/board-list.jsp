@@ -87,10 +87,10 @@
                                                     aria-label="Example select with button addon"
                                                     name="sort">
 
-                                                <option value="">정렬</option>
-                                                <option value="createdDateDESC">최근 순</option>
-                                                <option value="createdDateASC">오래된 순</option>
-                                                <option value="viewCnt">조회수 순</option>
+                                                <option class="sortTag" value="">정렬</option>
+                                                <option class="sortTag" value="createdDateDESC">최근 순</option>
+                                                <option class="sortTag" value="createdDateASC">오래된 순</option>
+                                                <option class="sortTag" value="viewCnt">조회수 순</option>
 
                                             </select>
                                         </div>
@@ -254,12 +254,17 @@
 <!-- footer 종료 -->
 
 <script>
-    function checkEmpty(){
+    function checkRecommendPage(){
         let param = document.getElementById('param').textContent;
         if(param === 'recommend') {
             let explain = document.getElementById('explain');
             explain.style.display='block';
         }
+
+        let sortTag = document.querySelectorAll('.sortTag');
+
+        for (const tag of [...sortTag]) tag.disabled = true;
+
     }
     function showImage() {
         const $thumbList = document.querySelectorAll('img[data-item-id]');
@@ -342,7 +347,7 @@
         }
     }
     (function () {
-        checkEmpty();
+        checkRecommendPage();
         choiceBoard();
         showImage();
         checkedChoiceButton();
