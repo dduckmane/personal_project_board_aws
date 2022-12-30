@@ -105,7 +105,7 @@
                 <input id="location" value="${boardUpdateForm.detailArea}" onkeyup='printLocation()' type="text"
                        name="detailArea" class="form-control" aria-label="Sizing example input"
                        aria-describedby="inputGroup-sizing-default2"
-                       placeholder="주소로 검색 ex) 제주특별자치도 제주시 첨단로 242"
+                       placeholder="반드시 도로명 주소로 입력해주세요"
                 >
             </div>
             <p id="errorFieldRegion" class="pe-3 error">상세 위치를 입력해주세요</p>
