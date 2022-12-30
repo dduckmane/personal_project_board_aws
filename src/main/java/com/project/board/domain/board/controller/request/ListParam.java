@@ -48,6 +48,7 @@ public class ListParam {
     public String getName(Member member){
         if(param.equals(BoardConst.CHOICE)) return member.getName()+" 님의 찜 목록";
         if (param.equals(BoardConst.RECOMMEND)) return member.getName()+" 님의 전용 맞춤";
+        if (param.equals(BoardConst.MYBOARD)) return member.getName()+" 의 작성한 게시글";
         if (param.equals(SEOUL.toString())) return SEOUL.getDescription();
         if (param.equals(GYEONGGI.toString())) return GYEONGGI.getDescription();
         if (param.equals(INCHEON.toString())) return INCHEON.getDescription();
