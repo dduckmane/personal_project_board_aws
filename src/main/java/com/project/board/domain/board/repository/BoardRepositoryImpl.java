@@ -141,15 +141,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         List<Board> result = queryFactory
                 .select(board)
                 .from(board)
-                .join(board.member,member).fetchJoin()
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
-                        , member.id.eq(user.getId())
-                        , board.id.in(member.choiceBoard)
+                        , board.id.in(user.getChoiceBoard())
                 )
                 .orderBy(boardSort(pageable))
                 .offset(pageable.getOffset())
@@ -159,15 +157,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         JPAQuery<Long> CountQuery = queryFactory
                 .select(board.count())
                 .from(board)
-                .join(board.member,member)
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
-                        , member.id.eq(user.getId())
-                        , board.id.in(member.choiceBoard)
+                        , board.id.in(user.getChoiceBoard())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

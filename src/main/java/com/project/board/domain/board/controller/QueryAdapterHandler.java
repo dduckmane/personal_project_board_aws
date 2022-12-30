@@ -5,6 +5,7 @@ import com.project.board.domain.board.controller.request.search.BoardSearchCondi
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.member.domain.Member;
+import com.project.board.domain.member.repository.MemberRepository;
 import com.project.board.domain.member.repository.SearchInfoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,11 +18,11 @@ import java.util.List;
 public class QueryAdapterHandler {
     private final List<findQueryAdapter> queryAdapters= new ArrayList<>();
 
-    public QueryAdapterHandler(BoardRepository boardRepository, SearchInfoRepository searchInfoRepository) {
+    public QueryAdapterHandler(BoardRepository boardRepository, SearchInfoRepository searchInfoRepository, MemberRepository memberRepository) {
 
         queryAdapters.add(new SearchAllAdapter(boardRepository));
         queryAdapters.add(new SearchByRegionAdapter(boardRepository));
-        queryAdapters.add(new SearchByChoiceAdapter(boardRepository));
+        queryAdapters.add(new SearchByChoiceAdapter(boardRepository, memberRepository));
         queryAdapters.add(new SearchByRecommendAdapter(searchInfoRepository ,boardRepository));
     }
 
