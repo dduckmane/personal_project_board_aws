@@ -3,6 +3,7 @@ package com.project.board.domain.reply.service;
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.member.domain.Member;
+import com.project.board.domain.member.repository.MemberRepository;
 import com.project.board.domain.reply.domain.Reply;
 import com.project.board.domain.reply.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReplyService {
     private final ReplyRepository replyRepository;
     private final BoardRepository boardRepository;
+    private final MemberRepository memberRepository;
     @Transactional
     public Long save(Long boardId, Member member,String replyText){
-        Board board = boardRepository.findById(boardId).orElseThrow();
-        Reply reply = Reply.write(replyText, board, member);
+        Reply reply = Reply.write(replyText
+                , boardRepository.findReplyById(boardId).orElseThrow()
+                , memberRepository.findReplyByUsername(member.getUsername()).orElseThrow()
+        );
 
         Reply saveReply = replyRepository.save(reply);
-
         return saveReply.getId();
     }
     @Transactional
