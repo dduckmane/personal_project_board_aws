@@ -32,8 +32,7 @@ public class SearchByChoiceAdapter implements findQueryAdapter{
 
     @Override
     public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
-        Member member = memberRepository.findByUsername(user.getUsername()).orElseThrow();
 
-        return boardRepository.searchByChoice(member, searchCondition ,pageable);
+        return boardRepository.searchByChoice(user, searchCondition ,pageable);
     }
 }
