@@ -16,6 +16,8 @@ public interface BoardRepositoryCustom {
 
     Page<Board> searchByChoice(Member user, BoardSearchCondition searchCondition, Pageable pageable);
 
+    Page<Board> searchMyBoard(Member user, BoardSearchCondition searchCondition, Pageable pageable);
+
     Page<Board> searchBestInfo(Pageable pageable);
 
 }

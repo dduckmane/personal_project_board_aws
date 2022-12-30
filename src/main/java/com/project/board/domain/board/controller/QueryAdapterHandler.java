@@ -22,6 +22,7 @@ public class QueryAdapterHandler {
 
         queryAdapters.add(new SearchAllAdapter(boardRepository));
         queryAdapters.add(new SearchByRegionAdapter(boardRepository));
+        queryAdapters.add(new SearchMyBoard(boardRepository));
         queryAdapters.add(new SearchByChoiceAdapter(boardRepository, memberRepository));
         queryAdapters.add(new SearchByRecommendAdapter(searchInfoRepository ,boardRepository));
     }

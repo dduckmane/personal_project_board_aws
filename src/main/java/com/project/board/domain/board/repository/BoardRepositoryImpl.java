@@ -172,6 +172,45 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
 
+    @Override
+    public Page<Board> searchMyBoard(Member user, BoardSearchCondition searchCondition, Pageable pageable) {
+
+        List<Board> result = queryFactory
+                .select(board)
+                .from(board)
+                .join(board.member,member).fetchJoin()
+                .where(
+                        usernameOrTitleEq(searchCondition.getAll())
+                        , usernameEq(searchCondition.getName())
+                        , titleEq(searchCondition.getTitle())
+                        , filteringPrice(searchCondition.getPrice())
+                        , filteringTag(searchCondition.getTag())
+                        , member.id.eq(user.getId())
+                )
+                .orderBy(boardSort(pageable))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch()
+                ;
+        JPAQuery<Long> CountQuery = queryFactory
+                .select(board.count())
+                .from(board)
+                .join(board.member,member).fetchJoin()
+                .where(
+                        usernameOrTitleEq(searchCondition.getAll())
+                        , usernameEq(searchCondition.getName())
+                        , titleEq(searchCondition.getTitle())
+                        , filteringPrice(searchCondition.getPrice())
+                        , filteringTag(searchCondition.getTag())
+                        , member.id.eq(user.getId())
+                )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                ;
+
+        return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
+    }
+
     public Page<Board> searchBestInfo(Pageable pageable) {
         List<Board> result = queryFactory
                 .selectFrom(board)
