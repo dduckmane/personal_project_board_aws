@@ -109,37 +109,37 @@ class BoardRepositoryImplTest extends BoardTestInit {
         });
     }
 
-    @Test
-    void searchByChoice() {
-        //given
-        boardRepoHelper.boardListInit();
-
-        Member member = memberRepository.findByUsername(MemberConst.USERNAME).orElseThrow();
-        memberService.choiceBoard(1L,member);
-        memberService.choiceBoard(2L,member);
-        memberService.choiceBoard(3L,member);
-        memberService.choiceBoard(4L,member);
-        memberService.choiceBoard(5L,member);
-        memberService.choiceBoard(6L,member);
-
-        BoardSearchCondition boardSearchCondition = BoardSearchCondition.builder()
-                .name(MemberConst.NAME)
-                .title("title")
-                .all(null)
-                .build();
-
-        PageRequest pageRequest = PageRequest.of(0, 10,Sort.by("id"));
-        //when
-        Page<Board> boards = boardRepository.searchByChoice(member, boardSearchCondition, pageRequest);
-        //then
-        boards.stream().forEach(board -> {
-            Assertions.assertAll(
-                    () -> assertThat(board.getTitle()).contains("title")
-                    , () -> assertThat(board.getMember().getName()).isEqualTo(MemberConst.NAME)
-            );
-        });
-        assertThat(boards.getTotalElements()).isEqualTo(6L);
-    }
+//    @Test
+//    void searchByChoice() {
+//        //given
+//        boardRepoHelper.boardListInit();
+//
+//        Member member = memberRepository.findByUsername(MemberConst.USERNAME).orElseThrow();
+//        memberService.choiceBoard(1L,member);
+//        memberService.choiceBoard(2L,member);
+//        memberService.choiceBoard(3L,member);
+//        memberService.choiceBoard(4L,member);
+//        memberService.choiceBoard(5L,member);
+//        memberService.choiceBoard(6L,member);
+//
+//        BoardSearchCondition boardSearchCondition = BoardSearchCondition.builder()
+//                .name(MemberConst.NAME)
+//                .title("title")
+//                .all(null)
+//                .build();
+//
+//        PageRequest pageRequest = PageRequest.of(0, 10,Sort.by("id"));
+//        //when
+//        Page<Board> boards = boardRepository.searchByChoice(member, boardSearchCondition, pageRequest);
+//        //then
+//        boards.stream().forEach(board -> {
+//            Assertions.assertAll(
+//                    () -> assertThat(board.getTitle()).contains("title")
+//                    , () -> assertThat(board.getMember().getName()).isEqualTo(MemberConst.NAME)
+//            );
+//        });
+//        assertThat(boards.getTotalElements()).isEqualTo(6L);
+//    }
 
     @Test
     void searchBestInfo() {
