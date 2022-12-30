@@ -55,7 +55,7 @@ class SearchByRecommendAdapterTest extends BoardTestInit {
         SearchInfo searchInfo1 = new SearchInfo(member);
         searchInfoRepository.save(searchInfo1);
         
-        SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(member).orElseThrow();
+        SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(member.getId()).orElseThrow();
         
         ListParam listParam = new ListParam(null, null);
         //category 별 조회

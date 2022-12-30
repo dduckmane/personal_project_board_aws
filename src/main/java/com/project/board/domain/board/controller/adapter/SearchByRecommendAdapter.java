@@ -8,6 +8,7 @@ import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
 import com.project.board.domain.member.repository.SearchInfoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import static com.project.board.domain.board.boardConst.BoardConst.RECOMMEND;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 /**
  * 추천 페이지 관련 adapter
  **/
@@ -43,7 +45,8 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
     @Override
     public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
         // 회원의 검색 정보를 가져온다.
-        SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(user).orElseThrow();
+        SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(user.getId()).orElseThrow();
+        log.info("------searchInfo.getId()-----"+searchInfo.getId());
         //하기전 list 를 비움
         recommendListDtos.clear();
 
