@@ -16,10 +16,10 @@ class OrderUtilsTest {
     void orderTest() {
         //given
         String[] orders = {
-                "4option1"
-                , "4option2"
-                , "6option3"
-                , "7option4"
+                "5option1"
+                , "2option2"
+                , "4option3"
+                , "4option4"
                 , "0"
         };
         Arrays.sort(orders);
@@ -33,10 +33,10 @@ class OrderUtilsTest {
             System.out.println("entry.getValue() = " + entry.getValue());
         });
         assertAll(
-            () -> assertThat(orderMap.get("option1")).isEqualTo(1)
-            , () -> assertThat(orderMap.get("option2")).isEqualTo(1)
-            , () -> assertThat(orderMap.get("option3")).isEqualTo(2)
-            , () -> assertThat(orderMap.get("option4")).isEqualTo(3)
+            () -> assertThat(orderMap.get("option1")).isEqualTo(2)
+            , () -> assertThat(orderMap.get("option2")).isEqualTo(2)
+            , () -> assertThat(orderMap.get("option3")).isEqualTo(3)
+            , () -> assertThat(orderMap.get("option4")).isEqualTo(1)
         );
 
         

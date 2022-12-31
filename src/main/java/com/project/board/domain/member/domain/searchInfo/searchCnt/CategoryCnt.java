@@ -20,7 +20,6 @@ public class CategoryCnt implements AddCnt {
     private int categoryOption2;
     private int categoryOption3;
     private int categoryOption4;
-    @ElementCollection
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
 

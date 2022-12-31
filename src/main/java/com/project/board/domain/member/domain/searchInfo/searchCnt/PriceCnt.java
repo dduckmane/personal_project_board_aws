@@ -20,7 +20,6 @@ public class PriceCnt implements AddCnt {
     private int priceOption2;
     private int priceOption3;
     private int priceOption4;
-    @ElementCollection
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override

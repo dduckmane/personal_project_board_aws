@@ -21,7 +21,6 @@ public class TagCnt implements AddCnt {
     private int tagOption2;
     private int tagOption3;
     private int tagOption4;
-    @ElementCollection
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override

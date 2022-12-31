@@ -26,7 +26,6 @@ public class RegionsCnt implements AddCnt {
     private int regionsOption7;
     private int regionsOption8;
     private int regionsOption9;
-    @ElementCollection
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
