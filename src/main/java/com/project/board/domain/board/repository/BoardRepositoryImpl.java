@@ -182,7 +182,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         List<Board> result = queryFactory
                 .select(board)
                 .from(board)
-                .join(board.member,member)
+                .leftJoin(board.member,member)
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
@@ -199,7 +199,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         JPAQuery<Long> CountQuery = queryFactory
                 .select(board.count())
                 .from(board)
-                .join(board.member,member)
+                .leftJoin(board.member,member)
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
