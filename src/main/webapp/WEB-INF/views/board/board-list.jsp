@@ -118,7 +118,7 @@
                                     <%--                                    필터 2: input 영역--%>
                                     <div class="col-6 p-0">
                                         <div id="content d-flex w-100">
-                                            <input id="filterInput" name="" class="form-control input" type="search"
+                                            <input id="filterInput" name="title" class="form-control input" type="search"
                                                    placeholder="Search" aria-label="Search">
                                         </div>
                                     </div>
