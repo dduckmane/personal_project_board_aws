@@ -241,13 +241,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return null;
     }
     private BooleanExpression usernameEq(String username){
-        return !isEmpty(username) ? member.username.contains(username) : null;
+        return !isEmpty(username) ? member.name.contains(username) : null;
     }
     private BooleanExpression titleEq(String title){
         return !isEmpty(title) ? board.title.contains(title) : null;
     }
     private BooleanExpression usernameOrTitleEq(String all){
-        return !isEmpty(all) ? board.title.contains(all).or(member.username.contains(all)) : null;
+        return !isEmpty(all) ? board.title.contains(all).or(member.name.contains(all)) : null;
     }
     private BooleanExpression filteringTag(String tag){
         return !isEmpty(tag) ? board.tagSum.contains(tag) : null;
