@@ -208,8 +208,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringTag(searchCondition.getTag())
                         , member.id.eq(user.getId())
                 )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
