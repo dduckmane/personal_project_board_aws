@@ -132,9 +132,8 @@ public class BoardController {
     public String saveForm(
             @PathVariable int groupId
             , @ModelAttribute BoardSaveForm boardSaveForm
-            , Model model
     ) {
-        model.addAttribute("groupId", groupId);
+        boardSaveForm.setGroupId(groupId);
 
         return "board/board-write";
     }

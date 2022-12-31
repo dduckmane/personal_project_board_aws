@@ -29,4 +29,5 @@ public class BoardSaveForm {
     @NotNull
     private int price;
     private String content;
+    private int groupId;
 }

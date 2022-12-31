@@ -116,7 +116,9 @@
             <button id="subButton" type="submit" class="btn btn-primary">글등록</button>
         </div>
     </div>
-    <input type="hidden" name="groupId" value="${groupId}">
+    <div>${boardSaveForm.groupId}</div>
+
+    <input type="hidden" name="groupId" value="${boardSaveForm.groupId}">
 </form>
 <%--</spring:hasBindErrors>--%>
 
