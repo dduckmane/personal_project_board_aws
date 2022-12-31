@@ -138,6 +138,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                 .select(board)
                 .from(board)
                 .join(choiceBoard).on(board.id.eq(choiceBoard.board.id))
+                .join(member).on(member.id.eq(choiceBoard.member.id))
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
@@ -155,6 +156,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                 .select(board.count())
                 .from(board)
                 .join(choiceBoard).on(board.id.eq(choiceBoard.board.id))
+                .join(member).on(member.id.eq(choiceBoard.member.id))
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
@@ -174,7 +176,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         List<Board> result = queryFactory
                 .select(board)
                 .from(board)
-                .leftJoin(board.member,member)
+                .join(board.member,member)
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
@@ -191,7 +193,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         JPAQuery<Long> CountQuery = queryFactory
                 .select(board.count())
                 .from(board)
-                .leftJoin(board.member,member)
+                .join(board.member,member)
                 .where(
                         usernameOrTitleEq(searchCondition.getAll())
                         , usernameEq(searchCondition.getName())
