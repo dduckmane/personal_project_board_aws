@@ -112,9 +112,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
                 )
-                .orderBy(boardSort(pageable))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 .fetch()
                 ;
         JPAQuery<Long> CountQuery = queryFactory

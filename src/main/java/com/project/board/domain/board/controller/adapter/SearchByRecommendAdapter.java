@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,8 +53,6 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
         recommendListDtos.clear();
 
         Page<Board> boards = boardRepository.searchAll(searchCondition, pageable);
-        log.info("--------boards.getTotalElements()-------"+boards.getTotalElements());
-        log.info("---------boards.getTotalPages()---------"+boards.getTotalPages());
         List<Board> content = boards.getContent();
 
         content.stream().forEach(board -> {
@@ -71,6 +70,6 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
                 .map(RecommendListDto::getBoard)
                 .collect(Collectors.toList());
 
-        return new PageImpl<>(result,pageable,result.size());
+        return new PageImpl<>(result,PageRequest.of(pageable.getPageNumber(),4),result.size());
     }
 }
