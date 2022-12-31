@@ -130,6 +130,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , usernameEq(searchCondition.getName())
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
+                        , filteringTag(searchCondition.getTag())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

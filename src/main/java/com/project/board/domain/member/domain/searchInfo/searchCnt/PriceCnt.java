@@ -23,7 +23,7 @@ public class PriceCnt implements AddCnt {
     private int priceOption4;
     @ElementCollection
     @MapKeyColumn
-    private static Map<String,Integer> orderMap=new ConcurrentHashMap<>();
+    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
     public Boolean support(String name) {

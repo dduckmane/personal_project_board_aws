@@ -29,7 +29,7 @@ public class RegionsCnt implements AddCnt {
     private int regionsOption9;
     @ElementCollection
     @MapKeyColumn
-    private static Map<String,Integer> orderMap=new ConcurrentHashMap<>();
+    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
     public Boolean support(String name) {

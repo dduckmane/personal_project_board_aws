@@ -54,6 +54,7 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
         List<Board> content = boards.getContent();
 
         content.stream().forEach(board -> {
+            log.info("-------board.getId()-------"+board.getId());
             //각 board 의 점수를 환산
             int totalScore = searchInfo.getTotalScore(board);
 

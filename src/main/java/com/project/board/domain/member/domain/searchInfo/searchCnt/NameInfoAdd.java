@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class NameInfoAdd implements AddCnt {
     @ElementCollection
     @MapKeyColumn
-    private static Map<String,Integer> orderMap=new ConcurrentHashMap<>();
+    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
     public Boolean support(String name) {

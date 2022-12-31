@@ -23,7 +23,7 @@ public class CategoryCnt implements AddCnt {
     private int categoryOption4;
     @ElementCollection
     @MapKeyColumn
-    private static Map<String,Integer> orderMap=new ConcurrentHashMap<>();
+    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
 
     @Override
