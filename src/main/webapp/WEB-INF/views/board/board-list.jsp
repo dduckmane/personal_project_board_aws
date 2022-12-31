@@ -107,7 +107,7 @@
                                                     aria-label="Example select with button addon"
                                                     onchange="searchCondition()">
 
-                                                <option class="opt" value="">검색 필터</option>
+                                                <option class="opt" value="title">검색 필터</option>
                                                 <option class="opt" value="title">제목</option>
                                                 <option class="opt" value="name">작성자</option>
                                                 <option class="opt" value="all">작성자+제목</option>
