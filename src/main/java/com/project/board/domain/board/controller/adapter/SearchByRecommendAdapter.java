@@ -52,7 +52,10 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
 
         Page<Board> boards = boardRepository.searchAll(searchCondition, pageable);
         List<Board> content = boards.getContent();
+        content.stream().forEach(board -> {
+            log.info("-------board.getId()-------"+board.getId());
 
+        });
         content.stream().forEach(board -> {
             log.info("-------board.getId()-------"+board.getId());
             //각 board 의 점수를 환산
