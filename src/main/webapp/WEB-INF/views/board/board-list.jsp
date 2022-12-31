@@ -228,8 +228,8 @@
 
 
 <!-- pagination 시작 -->
-<section>
-    <div class="container mt-3">
+<section id="page">
+    <div class="container mt-3" id="paging">
         <ul class="pagination justify-content-center">
             <c:if test="${not pageMaker.first}">
                 <li class="page-item"><a id="prevPage" class="page-link" href="">이전</a></li>
@@ -260,9 +260,12 @@
         if(param === 'recommend') {
             let explain = document.getElementById('explain');
             explain.style.display='block';
-            let sortTag = document.querySelectorAll('.sortTag');
 
+            let sortTag = document.querySelectorAll('.sortTag');
             for (const tag of [...sortTag]) tag.disabled = true;
+
+            let paging = document.getElementById('paging');
+            paging.style.display='none';
         }
 
 

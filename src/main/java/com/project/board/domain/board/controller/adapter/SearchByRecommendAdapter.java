@@ -66,10 +66,10 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
 
         //새로운 page 객체를 만듦
         List<Board> result = recommendListDtos
-                .stream()
+                .stream().limit(12)
                 .map(RecommendListDto::getBoard)
                 .collect(Collectors.toList());
 
-        return new PageImpl<>(result,PageRequest.of(pageable.getPageNumber(),4),result.size());
+        return new PageImpl<>(result, pageable, result.size());
     }
 }
