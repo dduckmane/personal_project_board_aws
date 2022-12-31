@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+import javax.persistence.MapKeyColumn;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,7 +21,9 @@ public class PriceCnt implements AddCnt {
     private int priceOption2;
     private int priceOption3;
     private int priceOption4;
-    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
+    @ElementCollection
+    @MapKeyColumn
+    private static Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
     public Boolean support(String name) {

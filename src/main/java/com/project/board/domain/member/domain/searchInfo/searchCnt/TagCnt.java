@@ -3,8 +3,7 @@ package com.project.board.domain.member.domain.searchInfo.searchCnt;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +20,8 @@ public class TagCnt implements AddCnt {
     private int tagOption2;
     private int tagOption3;
     private int tagOption4;
+    @ElementCollection
+    @MapKeyColumn
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override

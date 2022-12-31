@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+import javax.persistence.MapKeyColumn;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,8 +13,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Embeddable
 @Data
 public class NameInfoAdd implements AddCnt {
-
-    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
+    @ElementCollection
+    @MapKeyColumn
+    private static Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
     public Boolean support(String name) {
