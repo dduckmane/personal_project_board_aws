@@ -45,20 +45,14 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
     @Override
     public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
         // 회원의 검색 정보를 가져온다.
-        log.info("-----user.getId()-----"+user.getId());
         SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(user.getId()).orElseThrow();
-        log.info("------searchInfo.getId()-----"+searchInfo.getId());
         //하기전 list 를 비움
         recommendListDtos.clear();
 
         Page<Board> boards = boardRepository.searchAll(searchCondition, pageable);
         List<Board> content = boards.getContent();
-        content.stream().forEach(board -> {
-            log.info("-------board.getId()-------"+board.getId());
 
-        });
         content.stream().forEach(board -> {
-            log.info("-------board.getId()-------"+board.getId());
             //각 board 의 점수를 환산
             int totalScore = searchInfo.getTotalScore(board);
 
