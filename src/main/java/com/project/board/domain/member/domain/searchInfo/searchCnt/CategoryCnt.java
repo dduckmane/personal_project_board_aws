@@ -2,6 +2,7 @@ package com.project.board.domain.member.domain.searchInfo.searchCnt;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
@@ -16,6 +17,7 @@ import static com.project.board.global.util.OrderUtils.order;
 @Data
 @Embeddable
 @NoArgsConstructor
+@Slf4j
 public class CategoryCnt implements AddCnt {
     private int categoryOption1;
     private int categoryOption2;
@@ -53,6 +55,11 @@ public class CategoryCnt implements AddCnt {
         // map 에 카테고리별 점수가 담김
         // (categoryOption4,0) (categoryOption1,1) (categoryOption2,2) (categoryOption3,3)
         order(0,orders,orderMap,orders.length-1,0);
+
+        orderMap.entrySet().stream().forEach(entry -> {
+            log.info("----entry.getKey()-----"+entry.getKey());
+            log.info("-----entry.getValue()-----"+entry.getValue());
+        });
 
         return getScoreByGroupId(groupId);
     }

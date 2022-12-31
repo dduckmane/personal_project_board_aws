@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,7 @@ import static com.project.board.domain.board.boardConst.BoardConst.RECOMMEND;
 
 @Component
 @RequiredArgsConstructor
+@Transactional
 @Slf4j
 /**
  * 추천 페이지 관련 adapter
@@ -60,7 +62,7 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
             log.info("-------board.getId()-------"+board.getId());
             //각 board 의 점수를 환산
             int totalScore = searchInfo.getTotalScore(board);
-
+            log.info("----totalScore--------"+totalScore);
             //환산한 board 의 점수와 board 를 list 에 담음
             if(totalScore>=2) recommendListDtos.add(new RecommendListDto(totalScore,board));
         });
