@@ -59,8 +59,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringPrice(searchCondition.getPrice())
                         , board.groupId.eq(groupId)
                 )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
@@ -97,8 +95,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringPrice(searchCondition.getPrice())
                         , board.address.representativeArea.like(regions)
                 )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
@@ -132,8 +128,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
                 )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
@@ -169,8 +163,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringTag(searchCondition.getTag())
                         , choiceBoard.member.eq(user)
                 )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
@@ -224,8 +216,6 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         JPAQuery<Long> CountQuery = queryFactory
                 .select(board.count())
                 .from(board)
-                .offset(pageable.getOffset())
-                .limit(6l)
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
