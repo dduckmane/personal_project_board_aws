@@ -21,9 +21,6 @@ public class PriceCnt implements AddCnt {
     private int priceOption2;
     private int priceOption3;
     private int priceOption4;
-    @ElementCollection
-    @MapKeyColumn
-    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
     public Boolean support(String name) {
@@ -37,25 +34,9 @@ public class PriceCnt implements AddCnt {
         else priceOption4++;
     }
     public int getScore(int price){
-
-        String[] orders ={
-                Integer.toString(priceOption1)+"priceOption1"
-                ,Integer.toString(priceOption2)+"priceOption2"
-                ,Integer.toString(priceOption3)+"priceOption3"
-                ,Integer.toString(priceOption4)+"priceOption4"
-                ,"0"
-        };
-
-        Arrays.sort(orders);
-        order(0,orders,orderMap,orders.length-1,0);
-
-        return getScoreByGroupId(price);
-    }
-
-    private Integer getScoreByGroupId(int price) {
-        if(price<=10000) return orderMap.get("priceOption1");
-        else if(price>10000&price<=20000) return orderMap.get("priceOption2");
-        else if(price>20000&price<=30000) return orderMap.get("priceOption3");
-        else return orderMap.get("priceOption4");
+        if(price<=10000) return priceOption1;
+        else if(price>10000&price<=20000) return priceOption2;
+        else if(price>20000&price<=30000) return priceOption3;
+        else return priceOption4;
     }
 }

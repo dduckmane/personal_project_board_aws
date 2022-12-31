@@ -20,9 +20,6 @@ public class TagCnt implements AddCnt {
     private int tagOption2;
     private int tagOption3;
     private int tagOption4;
-    @ElementCollection
-    @MapKeyColumn
-    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
     public Boolean support(String name) {
@@ -35,29 +32,14 @@ public class TagCnt implements AddCnt {
         if(tag.contains(RESERVATION.toString())) tagOption3++;
         if(tag.contains(PLAY.toString())) tagOption4++;
     }
-    public int getScore(String tag){
+    public int getScore(String tagSum){
 
-        String[] orders ={
-                Integer.toString(tagOption1)+"tagOption1"
-                ,Integer.toString(tagOption2)+"tagOption2"
-                ,Integer.toString(tagOption3)+"tagOption3"
-                ,Integer.toString(tagOption4)+"tagOption4"
-                ,"0"
-        };
-
-        Arrays.sort(orders);
-        order(0,orders,orderMap,orders.length-1,0);
-
-        return getScoreByGroupId(tag);
-    }
-
-    private Integer getScoreByGroupId(String tagSum) {
         int sum=0;
 
-        if(tagSum.contains(MOOD.toString()))  sum+=orderMap.get("tagOption1");
-        if(tagSum.contains(PRICE.toString())) sum+= orderMap.get("tagOption2");
-        if(tagSum.contains(RESERVATION.toString())) sum+= orderMap.get("tagOption3");
-        if(tagSum.contains(PLAY.toString())) sum+= orderMap.get("tagOption4");
+        if(tagSum.contains(MOOD.toString()))  sum+=tagOption1;
+        if(tagSum.contains(PRICE.toString())) sum+= tagOption2;
+        if(tagSum.contains(RESERVATION.toString())) sum+= tagOption3;
+        if(tagSum.contains(PLAY.toString())) sum+= tagOption4;
 
         return sum;
     }

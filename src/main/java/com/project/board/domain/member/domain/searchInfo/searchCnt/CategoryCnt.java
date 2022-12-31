@@ -23,9 +23,6 @@ public class CategoryCnt implements AddCnt {
     private int categoryOption2;
     private int categoryOption3;
     private int categoryOption4;
-    @ElementCollection
-    @MapKeyColumn
-    private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
 
     @Override
@@ -41,35 +38,12 @@ public class CategoryCnt implements AddCnt {
     }
 
     public int getScore(int groupId){
-        // ex) 3categoryOption1 4categoryOption2 9categoryOption3 2categoryOption4
-        String[] orders ={
-                Integer.toString(categoryOption1)+"categoryOption1"
-                ,Integer.toString(categoryOption2)+"categoryOption2"
-                ,Integer.toString(categoryOption3)+"categoryOption3"
-                ,Integer.toString(categoryOption4)+"categoryOption4"
-                ,"0"
-        };
-        // String 을 이용한 정렬
-        // 2categoryOption4 3categoryOption1 4categoryOption2 9categoryOption3
-        Arrays.sort(orders);
-        // map 에 카테고리별 점수가 담김
-        // (categoryOption4,0) (categoryOption1,1) (categoryOption2,2) (categoryOption3,3)
-        order(0,orders,orderMap,orders.length-1,0);
-
-        orderMap.entrySet().stream().forEach(entry -> {
-            log.info("----entry.getKey()-----"+entry.getKey());
-            log.info("-----entry.getValue()-----"+entry.getValue());
-        });
-
-        return getScoreByGroupId(groupId);
-    }
-
-    private Integer getScoreByGroupId(int groupId) {
-        if(groupId ==1) return orderMap.get("categoryOption1");
-        if(groupId ==2) return orderMap.get("categoryOption2");
-        if(groupId ==3) return orderMap.get("categoryOption3");
-        if(groupId ==4) return orderMap.get("categoryOption4");
+        if(groupId ==1) return categoryOption1;
+        if(groupId ==2) return categoryOption2;
+        if(groupId ==3) return categoryOption3;
+        if(groupId ==4) return categoryOption4;
 
         throw new IllegalArgumentException("wrong option");
+
     }
 }
