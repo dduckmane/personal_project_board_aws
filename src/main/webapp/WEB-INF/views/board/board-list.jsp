@@ -256,14 +256,16 @@
 <script>
     function checkRecommendPage(){
         let param = document.getElementById('param').textContent;
+
         if(param === 'recommend') {
             let explain = document.getElementById('explain');
             explain.style.display='block';
+            let sortTag = document.querySelectorAll('.sortTag');
+
+            for (const tag of [...sortTag]) tag.disabled = true;
         }
 
-        let sortTag = document.querySelectorAll('.sortTag');
 
-        for (const tag of [...sortTag]) tag.disabled = true;
 
     }
     function showImage() {
