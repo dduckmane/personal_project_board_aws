@@ -212,8 +212,10 @@
                             <h5 class="card-title">${item.subTitle} <c:if test="${item.newArticle}"><img
                                     src="https://img.icons8.com/office/16/null/new.png"/></c:if></h5>
                             <p class="card-text p-0 m-0 text-align">
-                                조회수: ${item.viewCnt}
+                                  작성자: ${item.name} &nbsp 조회수: ${item.viewCnt}
                             </p>
+<%--                            <p class="card-text p-0 m-0 text-align">--%>
+<%--                            </p>--%>
                             <input type="checkbox" class="btn-check" name="options" id="${item.id}">
                             <label class="btn btn-outline-danger p-0 d-flex justify-content-center align-items-center"
                                    for="${item.id}">😍</label>
