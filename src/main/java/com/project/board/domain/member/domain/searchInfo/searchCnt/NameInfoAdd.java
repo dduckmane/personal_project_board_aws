@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 public class NameInfoAdd implements AddCnt {
 
-    @ElementCollection
     private Map<String,Integer> orderMap=new ConcurrentHashMap<>();
 
     @Override
