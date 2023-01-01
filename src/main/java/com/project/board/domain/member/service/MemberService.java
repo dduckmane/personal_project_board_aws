@@ -1,6 +1,6 @@
 package com.project.board.domain.member.service;
 
-import com.project.board.domain.board.controller.request.ListParam;
+import com.project.board.domain.board.controller.request.search.ListParam;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.board.service.BoardService;
@@ -8,7 +8,6 @@ import com.project.board.domain.choiceBoard.repository.ChoiceBoardRepository;
 import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.repository.MemberRepository;
 import com.project.board.domain.reply.repository.ReplyRepository;
-import com.project.board.domain.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,8 +43,8 @@ public class MemberService {
                  });
 
     }
-
-    public void withdrawal(Member member){
+    // 회원 탈퇴
+    public void withdrawal(Member member){ // 자식 테이블을 모두 제횡
         replyRepository
                 .findByMember(member)
                 .stream()

@@ -6,14 +6,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class BoardDto {
+//리스트 페이지
+public class BoardListDto {
     private Long id;
     private String subTitle;
     private Long viewCnt;
     private String name;
     private Boolean newArticle;
 
-    public BoardDto(Board board) {
+    public BoardListDto(Board board) {
         this.id=board.getId();
         this.subTitle = board.substringTitle();
         this.viewCnt = board.getViewCnt();

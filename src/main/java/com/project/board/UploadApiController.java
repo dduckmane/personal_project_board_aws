@@ -25,8 +25,8 @@ public class UploadApiController {
     @PostMapping("food/imageUpload.do")
     // 이미지 업로드
     public void imageUpload(HttpServletRequest request,
-                            HttpServletResponse response, MultipartHttpServletRequest multiFile
-            , @RequestParam MultipartFile upload) throws Exception{
+                            HttpServletResponse response
+            , @RequestParam MultipartFile upload){
 
         PrintWriter printWriter = null;
 
@@ -55,14 +55,12 @@ public class UploadApiController {
     // 서버로 전송된 이미지 뿌려주기
     @RequestMapping(value="/food/ckImgSubmit.do")
     public void ckSubmit(@RequestParam(value="storeFileName") String storeFileName
-            , HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            , HttpServletResponse response)
+            throws IOException{
 
-        System.out.println("ckSubmit시작");
 
         //서버에 저장된 이미지 경로
         String fileFullPath = FileUtils.fileFullPath(storeFileName, UPLOAD_PATH);
-        System.out.println("fileFullPath = " + fileFullPath);
         File imgFile = new File(fileFullPath);
 
         //사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.

@@ -31,14 +31,14 @@ public class ReplyRepositoryImpl implements ReplyRepositoryCustom{
                 .where(board.id.eq(boardId))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .fetch();
+                .fetch()
+                ;
 
         JPAQuery<Long> CountQuery = queryFactory
                 .select(reply.count())
+                .from(reply)
                 .where(board.id.eq(boardId))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .from(reply);
+                ;
 
         return PageableExecutionUtils.getPage(results,pageable,CountQuery::fetchOne);
     }

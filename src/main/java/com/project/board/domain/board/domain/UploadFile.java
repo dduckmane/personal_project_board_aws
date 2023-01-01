@@ -21,7 +21,7 @@ public class UploadFile {
         this.storeFileName = storeFileName;
     }
     public static UploadFile createUploadFile(MultipartFile multipartFile,String uploadPath){
-
+        //custom File Utils 제작
         String storeFileName = FileUtils.uploadFile(multipartFile, uploadPath);
         String uploadFileName = multipartFile.getOriginalFilename();
         UploadFile uploadFile = new UploadFile(uploadFileName, storeFileName);

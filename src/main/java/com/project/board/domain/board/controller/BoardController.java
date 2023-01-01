@@ -3,10 +3,10 @@ package com.project.board.domain.board.controller;
 import com.project.board.domain.board.controller.init.BoardInit;
 import com.project.board.domain.board.controller.request.BoardSaveForm;
 import com.project.board.domain.board.controller.request.BoardUpdateForm;
-import com.project.board.domain.board.controller.request.ListParam;
+import com.project.board.domain.board.controller.request.search.ListParam;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.controller.response.BoardDetailsDto;
-import com.project.board.domain.board.controller.response.BoardDto;
+import com.project.board.domain.board.controller.response.BoardListDto;
 import com.project.board.domain.board.domain.Address;
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.domain.UploadFile;
@@ -20,6 +20,7 @@ import com.project.board.global.config.auth.PrincipalDetails;
 import com.project.board.global.page.PageMaker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +42,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/user/board")
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class BoardController {
     private final BoardRepository boardRepository;
     private final BoardService boardService;
@@ -51,23 +52,22 @@ public class BoardController {
     @Value("${custom.upload.path}")
     private String UPLOAD_PATH;
 
-    @ModelAttribute("tags")
+    @ModelAttribute("tags")// 태그 별
     public List<Tag> tag() {
         return boardInit.getTags();
     }
 
-    @ModelAttribute("categories")
+    @ModelAttribute("categories") // 카테고리 별 ex) 한식, 양식, 중식, 일식
     public List<Category> categories() {
         return boardInit.getCategories();
     }
 
-    @ModelAttribute("regions")
+    @ModelAttribute("regions") // 지역 별 ex) 서울, 경기, 인천...
     public List<Regions> regions() {
         return boardInit.getRegions();
     }
 
     @GetMapping("/list")
-    //제목으로 검색 추가
     public String main(
             @AuthenticationPrincipal PrincipalDetails principalDetails
             , @ModelAttribute("listParam") ListParam listParam
@@ -75,15 +75,18 @@ public class BoardController {
             , @PageableDefault(page = 0, size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
             , Model model
     ) {
-        Page<BoardDto> result = adapterHandler
+        // listParam(리스트에 들어오는 requestParam) 에 따른 클래스 제공
+        // Adapter Pattern
+        Page<BoardListDto> result = adapterHandler
                 .service(
                         listParam.getParam()
                         , principalDetails.getMember()
                         , searchCondition
                         , pageable
                 )
-                .map(BoardDto::new);
+                .map(BoardListDto::new);
 
+        // 추천 페이지를 위한 사용자 검색 정보를 수집
         memberService.collectInfo(principalDetails.getMember(), listParam, searchCondition);
 
         int nowPage = result.getPageable().getPageNumber() + 1;
@@ -120,6 +123,7 @@ public class BoardController {
 
         BoardDetailsDto boardDetailsDto = findBoard.map(BoardDetailsDto::new).orElseThrow();
 
+        // 권한처리
         boolean checkMyself = boardService.checkMyself(principalDetails.getMember(), findBoard.orElseThrow());
 
         model.addAttribute("checkMySelf", checkMyself);
@@ -188,7 +192,7 @@ public class BoardController {
                 .orElseThrow().
                 checkMySelf(principalDetails.getUsername());
 
-        UploadFile uploadFile = null;
+        UploadFile uploadFile = null;// 수정하지 않는다면 기존 썸네일을 유지
 
         if(boardUpdateForm.getThumbNail().getSize()!=0)
             uploadFile = UploadFile
@@ -214,7 +218,6 @@ public class BoardController {
     }
 
     @GetMapping("/delete/{boardId}")
-    //물어보기 외래키 제약조건??
     public String delete(@PathVariable Long boardId) {
         boardService.delete(boardId);
         return "redirect:/";

@@ -17,7 +17,7 @@ import static com.project.board.global.util.OrderUtils.order;
 @Data
 @Embeddable
 @NoArgsConstructor
-@Slf4j
+// 카테고리별 횟 수를 증가시킨다.
 public class CategoryCnt implements AddCnt {
     private int categoryOption1;
     private int categoryOption2;

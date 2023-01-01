@@ -43,7 +43,7 @@ public class ReplyApiController {
                 .build();
     }
     @PostMapping
-    public ResponseEntity<String> save(
+    public ResponseEntity<String> write(
             @AuthenticationPrincipal PrincipalDetails principalDetails
             , @RequestBody ReplySaveDto replySaveDto
     ){

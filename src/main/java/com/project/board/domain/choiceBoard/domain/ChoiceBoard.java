@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+// 찜 목록 중간 테이블, 단방향 설계
 public class ChoiceBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

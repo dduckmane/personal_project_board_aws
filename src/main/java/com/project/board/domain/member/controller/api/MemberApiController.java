@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class MemberApiController {
     private final ChoiceBoardService choiceBoardService;
     private final ChoiceBoardRepository choiceBoardRepository;
+    //찜을 한다.
     @PostMapping("/choice")
     public void selectedBoard(
             @AuthenticationPrincipal PrincipalDetails principalDetails
@@ -31,6 +32,7 @@ public class MemberApiController {
                 principalDetails.getMember()
                 , choiceBoard.getBoardId());
     }
+    //찜한 목록을 보여준다.
     @GetMapping("/choice")
     public List<Long> findChoiceBoardId(
             @AuthenticationPrincipal PrincipalDetails principalDetails

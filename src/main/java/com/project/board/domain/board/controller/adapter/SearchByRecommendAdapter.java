@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,25 +45,33 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
     }
 
     @Override
-    public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
+    public Page<Board> handle(
+            Object param
+            , Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
         // 회원의 검색 정보를 가져온다.
-        SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(user.getId()).orElseThrow();
+        SearchInfo searchInfo = searchInfoRepository
+                .findSearchInfoByMember(user.getId())
+                .orElseThrow();
         //하기전 list 를 비움
         recommendListDtos.clear();
 
-        Page<Board> boards = boardRepository.searchAll(searchCondition, pageable);
-        List<Board> content = boards.getContent();
+        List<Board> content = boardRepository
+                .searchAll(searchCondition, pageable)
+                .getContent();
 
         content.stream().forEach(board -> {
             //각 board 의 점수를 환산
             int totalScore = searchInfo.getTotalScore(board);
-            //환산한 board 의 점수와 board 를 list 에 담음
+            //환산한 board 의 점수와 board 를 list 에 담음 * 점수가 2점 이상인 board 만 추출
             if(totalScore>=2) recommendListDtos.add(new RecommendListDto(totalScore,board));
         });
-        // 점수 바탕으로 정렬
+        // 점수 바탕으로 정렬 CompareTo OverRiding
         Collections.sort(recommendListDtos);
 
-        //새로운 page 객체를 만듦
+        //새로운 page 객체를 만듦, Max 12
         List<Board> result = recommendListDtos
                 .stream().limit(12)
                 .map(RecommendListDto::getBoard)

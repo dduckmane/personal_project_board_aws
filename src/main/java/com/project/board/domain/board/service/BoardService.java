@@ -37,7 +37,7 @@ public class BoardService {
             , int price
             , List<String> tag
     ){
-        String renewTag="";
+        String renewTag=""; // tag 는 합쳐서 저장
         for (String tagName : tag) { renewTag+=","+tagName;}
 
         Board saveBoard = Board.write(
@@ -77,17 +77,23 @@ public class BoardService {
     @Transactional
     public void delete(Long boardId){
         Board board = boardRepository.findById(boardId).orElseThrow();
-
-        choiceBoardRepository.findByBoard(board).stream().forEach(choiceBoard -> {
-            choiceBoardRepository.delete(choiceBoard);
-        });
+        // 댓글을 먼저 delete
+        choiceBoardRepository
+                .findByBoard(board)
+                .stream()
+                .forEach(choiceBoard -> {
+            choiceBoardRepository.delete(choiceBoard); });
 
         boardRepository.delete(board);
     }
     @Transactional
-    public Optional<Board> findOne(Long boardId, HttpServletResponse response, HttpServletRequest request){
+    public Optional<Board> findOne(
+            Long boardId
+            , HttpServletResponse response
+            , HttpServletRequest request
+    ){
         Board board = boardRepository.findMemberById(boardId).orElseThrow();
-
+        // 상세 조회시 조회수 증가
         makeViewCount(board,response,request);
         return Optional.ofNullable(board);
     }
@@ -96,7 +102,12 @@ public class BoardService {
         return board.checkMySelf(member.getUsername());
     }
 
-    private void makeViewCount(Board board, HttpServletResponse response, HttpServletRequest request) {
+    //쿠키를 이용한 조회수 무작위 증가 방지
+    private void makeViewCount(
+            Board board
+            , HttpServletResponse response
+            , HttpServletRequest request
+    ) {
         Cookie foundCookie = WebUtils.getCookie(request, "board_" + board.getId());
 
         if (foundCookie == null) {

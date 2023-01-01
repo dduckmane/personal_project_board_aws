@@ -22,7 +22,12 @@ public class SearchAllAdapter implements findQueryAdapter{
     }
 
     @Override
-    public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
+    public Page<Board> handle(
+            Object param
+            , Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
         int groupId = (int) param;
 
         return boardRepository.searchAllCondition(groupId,searchCondition,pageable);

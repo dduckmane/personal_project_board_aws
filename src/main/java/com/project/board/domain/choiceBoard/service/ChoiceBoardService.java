@@ -14,6 +14,7 @@ public class ChoiceBoardService {
     private final ChoiceBoardRepository choiceBoardRepository;
     private final BoardRepository boardRepository;
 
+    // 찜이 되있다면 제거 안되있다면 추가
     public void choiceBoard (Member member, Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow();
 

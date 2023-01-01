@@ -31,10 +31,12 @@ public class SearchMyBoard implements findQueryAdapter{
     }
 
     @Override
-    public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
-        Page<Board> boards = boardRepository.searchMyBoard(user, searchCondition, pageable);
-        log.info("myboard--------boards.getTotalElements()-------"+boards.getTotalElements());
-        log.info("myboard---------boards.getTotalPages()---------"+boards.getTotalPages());
+    public Page<Board> handle(
+            Object param
+            , Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
         return boardRepository.searchMyBoard(user, searchCondition ,pageable);
     }
 }

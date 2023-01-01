@@ -10,6 +10,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+//상세 페이지
 public class BoardDetailsDto {
     private Long id;
     private String title;

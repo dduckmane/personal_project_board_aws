@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+//지역 별 조회 Adapter
 public class SearchByRegionAdapter implements findQueryAdapter{
 
     private final BoardRepository boardRepository;
+    //정해진 지역이름만 허용
     private final String regionNames="SEOUL GYEONGGI INCHEON GANG JN JS GS GN JEJU";
 
     @Override
@@ -28,7 +30,12 @@ public class SearchByRegionAdapter implements findQueryAdapter{
     }
 
     @Override
-    public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
+    public Page<Board> handle(
+            Object param
+            , Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
         String region = (String) param;
 
         return boardRepository.searchByRegions(region,searchCondition,pageable);

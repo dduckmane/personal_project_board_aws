@@ -9,6 +9,6 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Address {
-    private String representativeArea;
-    private String detailArea;
+    private String representativeArea;// 대표 지역
+    private String detailArea;// 상세 지역
 }

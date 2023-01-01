@@ -28,8 +28,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     public BoardRepositoryImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
+    //카테고리별 조회
     @Override
-    public Page<Board> searchAllCondition(int groupId, BoardSearchCondition searchCondition, Pageable pageable) {
+    public Page<Board> searchAllCondition(
+            int groupId
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
 
         List<Board> result = queryFactory
                 .select(board).distinct()
@@ -65,7 +70,12 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     }
 
     @Override
-    public Page<Board> searchByRegions(String regions, BoardSearchCondition searchCondition, Pageable pageable) {
+    // 지역별 조회
+    public Page<Board> searchByRegions(
+            String regions
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
 
         List<Board> result = queryFactory
                 .select(board)
@@ -100,6 +110,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
     @Override
+    // 전체 조회
     public Page<Board> searchAll(BoardSearchCondition searchCondition, Pageable pageable) {
         List<Board> result = queryFactory
                 .select(board)
@@ -130,7 +141,12 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
     @Override
-    public Page<Board> searchByChoice(Member user, BoardSearchCondition searchCondition, Pageable pageable) {
+    //찜 목록 조회
+    public Page<Board> searchByChoice(
+            Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
         List<Board> result = queryFactory
                 .select(board)
                 .from(board)
@@ -168,7 +184,12 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     }
 
     @Override
-    public Page<Board> searchMyBoard(Member user, BoardSearchCondition searchCondition, Pageable pageable) {
+    // 내가 쓴 게시글
+    public Page<Board> searchMyBoard(
+            Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
 
         List<Board> result = queryFactory
                 .select(board)
@@ -204,6 +225,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
 
+    //조회수 별 맛집 BEST 조회
     public Page<Board> searchBestInfo(Pageable pageable) {
         List<Board> result = queryFactory
                 .selectFrom(board)
@@ -221,7 +243,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     }
 
 
-
+    // 정렬 조건
     private OrderSpecifier<?> boardSort(Pageable page) {
         if (!page.getSort().isEmpty()) {
             for (Sort.Order order : page.getSort()) {

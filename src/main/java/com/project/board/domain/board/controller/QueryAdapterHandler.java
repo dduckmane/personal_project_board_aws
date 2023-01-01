@@ -18,18 +18,24 @@ import java.util.List;
 public class QueryAdapterHandler {
     private final List<findQueryAdapter> queryAdapters= new ArrayList<>();
 
-    public QueryAdapterHandler(BoardRepository boardRepository, SearchInfoRepository searchInfoRepository, MemberRepository memberRepository) {
+    public QueryAdapterHandler(BoardRepository boardRepository, SearchInfoRepository searchInfoRepository) {
 
         queryAdapters.add(new SearchAllAdapter(boardRepository));
         queryAdapters.add(new SearchByRegionAdapter(boardRepository));
         queryAdapters.add(new SearchMyBoard(boardRepository));
-        queryAdapters.add(new SearchByChoiceAdapter(boardRepository, memberRepository));
+        queryAdapters.add(new SearchByChoiceAdapter(boardRepository));
         queryAdapters.add(new SearchByRecommendAdapter(searchInfoRepository ,boardRepository));
     }
 
-    public Page<Board> service(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable){
+    public Page<Board> service(
+            Object param
+            , Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ){
+        //param 에 따른 헨들러를 제공
         findQueryAdapter handlerAdapter = getHandlerAdapter(param);
-
+        //그에 맞는 헨들러가 처리
         return handlerAdapter.handle(param, user, searchCondition, pageable);
     }
     private findQueryAdapter getHandlerAdapter(Object param){
