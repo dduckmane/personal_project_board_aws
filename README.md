@@ -22,6 +22,8 @@
 
 
 
+
+
 ## 2. 사용 기술
 ### 1) Back-End
   - Java 11, Spring Framework 2.7.7, Spring boot, RESTFUL API, QueryDsl 5.0.0, Spring Data Jpa 2.7.6, JPQL, JSTL, Spring Security 5.7.6
@@ -44,22 +46,55 @@
 ### 1) 맞춤 추천 알고리즘 개발
   
   - SearchInfo Entity를 생성 
+    <details>
+    <summary>코드 링크</summary>
+    <div markdown="1">
     https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/SearchInfo.java
+    </div>
+    </details>
     
     : 회원의 검색 정보들을 각각의 종류별로 임베디드 타입으로 Search Info 테이블에 저장된다.
   - AddCnt 라는 adapter interface 생성
-    https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/AddCnt.java
+    <details>
+    <summary>코드 링크</summary>
+    <div markdown="1">
+        https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/AddCnt.java
+
+    </div>
+    </details>
     
     : 회원이 검색한 정보를 바탕으로 횟수와 내용을 저장한다.
     
     - 어뎁터 예시_1 : 회원이 검색한 필터 조건을 저장한다.
+    
+        <details>
+        <summary>코드 링크</summary>
+        <div markdown="1">
       https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/TagCnt.java  
+
+        </div>
+        </details>
+        
     - 어텝터 예시_2
       : 회원의 검색한 내용을 리스트로 반환하여 검색한 횟수를 저장한다.
-      https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/NameInfoAdd.java
+      
+      <details>
+      <summary>코드 링크</summary>
+      <div markdown="1">
+        https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/NameInfoAdd.java
+      </div>
+      </details>
+
       
   - SearchByRecommendAdapter 를 생성
+
+      <details>
+      <summary>코드 링크</summary>
+      <div markdown="1">
                    https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/adapter/SearchByRecommendAdapter.java
+        
+      </div>
+      </details>
     - 회원이 추천 페이지를 요청하면 회원의 searchinfo 테이블을 바탕으로 각 board 의 점수를 환산
     - 높은 점수별로 환산을 한 후에 상위 12개를 회원에게 보여준다.
 
