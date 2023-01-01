@@ -4,7 +4,6 @@ import com.project.board.domain.board.controller.request.search.BoardSearchCondi
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.member.domain.Member;
-import com.project.board.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +19,6 @@ import static com.project.board.domain.board.boardConst.BoardConst.CHOICE;
 public class SearchByChoiceAdapter implements findQueryAdapter{
 
     private final BoardRepository boardRepository;
-    private final MemberRepository memberRepository;
 
     @Override
     public boolean supports(Object param) {
@@ -31,9 +29,13 @@ public class SearchByChoiceAdapter implements findQueryAdapter{
     }
 
     @Override
-    public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
-        Member member = memberRepository.findByUsername(user.getUsername()).orElseThrow();
+    public Page<Board> handle(
+            Object param
+            , Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
 
-        return boardRepository.searchByChoice(member, searchCondition ,pageable);
+        return boardRepository.searchByChoice(user, searchCondition ,pageable);
     }
 }

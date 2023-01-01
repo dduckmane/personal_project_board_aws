@@ -4,29 +4,30 @@ import com.project.board.domain.board.controller.request.search.BoardSearchCondi
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.member.domain.Member;
+import com.project.board.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import static com.project.board.domain.board.boardConst.BoardConst.CHOICE;
+import static com.project.board.domain.board.boardConst.BoardConst.MYBOARD;
+
 @Component
 @RequiredArgsConstructor
-//지역 별 조회 Adapter
-public class SearchByRegionAdapter implements findQueryAdapter{
+@Slf4j
+//찜 목록 관련 adapter
+public class SearchMyBoard implements findQueryAdapter{
 
     private final BoardRepository boardRepository;
-    //정해진 지역이름만 허용
-    private final String regionNames="SEOUL GYEONGGI INCHEON GANG JN JS GS GN JEJU";
 
     @Override
     public boolean supports(Object param) {
         if(!(param instanceof String)) return false;
 
-        String regions=regionNames;
-        String region = (String) param;
-
-        boolean contains = regions.contains(region);
-        return contains;
+        String changeParam = (String) param;
+        return changeParam.equals(MYBOARD);
     }
 
     @Override
@@ -36,8 +37,6 @@ public class SearchByRegionAdapter implements findQueryAdapter{
             , BoardSearchCondition searchCondition
             , Pageable pageable
     ) {
-        String region = (String) param;
-
-        return boardRepository.searchByRegions(region,searchCondition,pageable);
+        return boardRepository.searchMyBoard(user, searchCondition ,pageable);
     }
 }

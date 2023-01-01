@@ -29,6 +29,7 @@ public class BoardInit {
         initTags();
         initRegions();
     }
+    // 한식, 양식, 중식, 일식 init
     public void initCategory(){
         categories.add(KOREAN);
         categories.add(AMERICA);
@@ -36,6 +37,7 @@ public class BoardInit {
         categories.add(JAPAN);
 
     }
+    // 태그 init ex) 가성비, 예약 가능, 분위기, 놀기 좋은
     public void initTags(){
         tags.add(PRICE);
         tags.add(RESERVATION);
@@ -43,6 +45,7 @@ public class BoardInit {
         tags.add(PLAY);
 
     }
+    // 지역별을 init
     public void initRegions(){
         regions.add(SEOUL);
         regions.add(GYEONGGI);

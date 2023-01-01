@@ -95,10 +95,10 @@
                     <input type="range" value="${boardUpdateForm.price}" min="0" max="100000" step="1000" class="slider"
                            id="myRange">
                 </ul>
-                <input id="value" name="price" type="text" class="form-control"
+                <input id="value" name="price" type="number" class="form-control"
                        aria-label="Text input with segmented dropdown button">
             </div>
-            <p class="explain ps-2"> 버튼을 눌러 대략적인 평균 금액을 설정하세요</p>
+            <p class="explain ps-2"> 버튼을 눌러 음식의 평균 금액을 설정하세요</p>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default2">상세 위치</span>

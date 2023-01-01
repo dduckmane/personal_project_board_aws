@@ -1,7 +1,7 @@
 package com.project.board.domain.board.controller.adapter;
 
 import com.project.board.domain.board.boardConst.BoardConst;
-import com.project.board.domain.board.controller.request.ListParam;
+import com.project.board.domain.board.controller.request.search.ListParam;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.domain.Board;
 import com.project.board.domain.board.domain.boardenum.Regions;
@@ -55,7 +55,7 @@ class SearchByRecommendAdapterTest extends BoardTestInit {
         SearchInfo searchInfo1 = new SearchInfo(member);
         searchInfoRepository.save(searchInfo1);
         
-        SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(member).orElseThrow();
+        SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(member.getId()).orElseThrow();
         
         ListParam listParam = new ListParam(null, null);
         //category 별 조회

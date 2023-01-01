@@ -2,6 +2,7 @@ package com.project.board.domain.board.repository;
 
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.domain.Board;
+import com.project.board.domain.choiceBoard.domain.QChoiceBoard;
 import com.project.board.domain.member.domain.Member;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.project.board.domain.board.domain.QBoard.board;
+import static com.project.board.domain.choiceBoard.domain.QChoiceBoard.*;
 import static com.project.board.domain.member.domain.QMember.member;
 import static org.apache.logging.log4j.util.Strings.isEmpty;
 
@@ -26,8 +28,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     public BoardRepositoryImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
+    //카테고리별 조회
     @Override
-    public Page<Board> searchAllCondition(int groupId, BoardSearchCondition searchCondition, Pageable pageable) {
+    public Page<Board> searchAllCondition(
+            int groupId
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
 
         List<Board> result = queryFactory
                 .select(board).distinct()
@@ -57,15 +64,18 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringPrice(searchCondition.getPrice())
                         , board.groupId.eq(groupId)
                 )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
 
     @Override
-    public Page<Board> searchByRegions(String regions, BoardSearchCondition searchCondition, Pageable pageable) {
+    // 지역별 조회
+    public Page<Board> searchByRegions(
+            String regions
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
 
         List<Board> result = queryFactory
                 .select(board)
@@ -95,13 +105,12 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringPrice(searchCondition.getPrice())
                         , board.address.representativeArea.like(regions)
                 )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
     @Override
+    // 전체 조회
     public Page<Board> searchAll(BoardSearchCondition searchCondition, Pageable pageable) {
         List<Board> result = queryFactory
                 .select(board)
@@ -114,6 +123,86 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
                 )
+                .fetch()
+                ;
+        JPAQuery<Long> CountQuery = queryFactory
+                .select(board.count())
+                .from(board)
+                .join(board.member,member)
+                .where(
+                        usernameOrTitleEq(searchCondition.getAll())
+                        , usernameEq(searchCondition.getName())
+                        , titleEq(searchCondition.getTitle())
+                        , filteringPrice(searchCondition.getPrice())
+                        , filteringTag(searchCondition.getTag())
+                )
+                ;
+
+        return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
+    }
+    @Override
+    //찜 목록 조회
+    public Page<Board> searchByChoice(
+            Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
+        List<Board> result = queryFactory
+                .select(board)
+                .from(board)
+                .join(choiceBoard).on(board.id.eq(choiceBoard.board.id))
+                .join(member).on(member.id.eq(choiceBoard.member.id))
+                .where(
+                        usernameOrTitleEq(searchCondition.getAll())
+                        , usernameEq(searchCondition.getName())
+                        , titleEq(searchCondition.getTitle())
+                        , filteringPrice(searchCondition.getPrice())
+                        , filteringTag(searchCondition.getTag())
+                        , choiceBoard.member.eq(user)
+                )
+                .orderBy(boardSort(pageable))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch()
+                ;
+        JPAQuery<Long> CountQuery = queryFactory
+                .select(board.count())
+                .from(board)
+                .join(choiceBoard).on(board.id.eq(choiceBoard.board.id))
+                .join(member).on(member.id.eq(choiceBoard.member.id))
+                .where(
+                        usernameOrTitleEq(searchCondition.getAll())
+                        , usernameEq(searchCondition.getName())
+                        , titleEq(searchCondition.getTitle())
+                        , filteringPrice(searchCondition.getPrice())
+                        , filteringTag(searchCondition.getTag())
+                        , choiceBoard.member.eq(user)
+                )
+                ;
+
+        return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
+    }
+
+    @Override
+    // 내가 쓴 게시글
+    public Page<Board> searchMyBoard(
+            Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
+
+        List<Board> result = queryFactory
+                .select(board)
+                .from(board)
+                .join(board.member,member)
+                .where(
+                        usernameOrTitleEq(searchCondition.getAll())
+                        , usernameEq(searchCondition.getName())
+                        , titleEq(searchCondition.getTitle())
+                        , filteringPrice(searchCondition.getPrice())
+                        , filteringTag(searchCondition.getTag())
+                        , member.id.eq(user.getId())
+                )
                 .orderBy(boardSort(pageable))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -128,50 +217,15 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
                         , usernameEq(searchCondition.getName())
                         , titleEq(searchCondition.getTitle())
                         , filteringPrice(searchCondition.getPrice())
-                )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                ;
-
-        return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
-    }
-    @Override
-    public Page<Board> searchByChoice(Member user, BoardSearchCondition searchCondition, Pageable pageable) {
-
-        List<Board> result = queryFactory
-                .select(board)
-                .from(board)
-                .where(
-                        usernameOrTitleEq(searchCondition.getAll())
-                        , usernameEq(searchCondition.getName())
-                        , titleEq(searchCondition.getTitle())
-                        , filteringPrice(searchCondition.getPrice())
                         , filteringTag(searchCondition.getTag())
-                        , board.id.in(user.getChoiceBoard())
+                        , member.id.eq(user.getId())
                 )
-                .orderBy(boardSort(pageable))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetch()
-                ;
-        JPAQuery<Long> CountQuery = queryFactory
-                .select(board.count())
-                .from(board)
-                .where(
-                        usernameOrTitleEq(searchCondition.getAll())
-                        , usernameEq(searchCondition.getName())
-                        , titleEq(searchCondition.getTitle())
-                        , filteringPrice(searchCondition.getPrice())
-                        , filteringTag(searchCondition.getTag())
-                        , board.id.in(user.getChoiceBoard())
-                )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
 
+    //조회수 별 맛집 BEST 조회
     public Page<Board> searchBestInfo(Pageable pageable) {
         List<Board> result = queryFactory
                 .selectFrom(board)
@@ -183,15 +237,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         JPAQuery<Long> CountQuery = queryFactory
                 .select(board.count())
                 .from(board)
-                .offset(pageable.getOffset())
-                .limit(6l)
                 ;
 
         return PageableExecutionUtils.getPage(result,pageable,CountQuery::fetchOne);
     }
 
 
-
+    // 정렬 조건
     private OrderSpecifier<?> boardSort(Pageable page) {
         if (!page.getSort().isEmpty()) {
             for (Sort.Order order : page.getSort()) {
@@ -211,13 +263,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return null;
     }
     private BooleanExpression usernameEq(String username){
-        return !isEmpty(username) ? member.username.contains(username) : null;
+        return !isEmpty(username) ? member.name.contains(username) : null;
     }
     private BooleanExpression titleEq(String title){
         return !isEmpty(title) ? board.title.contains(title) : null;
     }
     private BooleanExpression usernameOrTitleEq(String all){
-        return !isEmpty(all) ? board.title.contains(all).or(member.username.contains(all)) : null;
+        return !isEmpty(all) ? board.title.contains(all).or(member.name.contains(all)) : null;
     }
     private BooleanExpression filteringTag(String tag){
         return !isEmpty(tag) ? board.tagSum.contains(tag) : null;

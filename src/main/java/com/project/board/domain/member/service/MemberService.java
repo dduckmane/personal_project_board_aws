@@ -1,11 +1,13 @@
 package com.project.board.domain.member.service;
 
-import com.project.board.domain.board.controller.request.ListParam;
+import com.project.board.domain.board.controller.request.search.ListParam;
 import com.project.board.domain.board.controller.request.search.BoardSearchCondition;
 import com.project.board.domain.board.repository.BoardRepository;
 import com.project.board.domain.board.service.BoardService;
+import com.project.board.domain.choiceBoard.repository.ChoiceBoardRepository;
 import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.repository.MemberRepository;
+import com.project.board.domain.reply.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,14 +23,8 @@ public class MemberService {
     private final SearchInfoService searchInfoService;
     private final BoardRepository boardRepository;
     private final BoardService boardService;
-    //찜 기능 구현
-    public void choiceBoard(Long boardId, Member member) {
-        memberRepository
-                .findByUsername(member.getUsername())
-                .orElseThrow()
-                .choiceBoard(boardId);
-    }
-
+    private final ReplyRepository replyRepository;
+    private final ChoiceBoardRepository choiceBoardRepository;
     //정보를 수집
     public void collectInfo(
             Member member
@@ -47,8 +43,16 @@ public class MemberService {
                  });
 
     }
-
-    public void withdrawal(Member member){
+    // 회원 탈퇴
+    public void withdrawal(Member member){ // 자식 테이블을 모두 제횡
+        replyRepository
+                .findByMember(member)
+                .stream()
+                .forEach(reply -> { replyRepository.delete(reply);});
+        choiceBoardRepository
+                .findChoiceBoardListByMember(member)
+                .stream()
+                .forEach(choiceBoard -> {choiceBoardRepository.delete(choiceBoard);});
         boardRepository
                 .findBoardByMember(member)
                 .stream()

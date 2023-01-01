@@ -6,14 +6,22 @@ import com.project.board.domain.member.domain.searchInfo.searchCnt.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 회원 별 검색 정보를 저장
+ * 나중에 회원 별 검색 정보를 바탕으로 추출 시에
+ * 모두 @Embedded 로 되어있어서 db 쿼리는 1개
+ * 나머지는 memory 에서 진행
+ * */
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Slf4j
 public class SearchInfo {
 
     public static String CATEGORY="category";
@@ -78,6 +86,7 @@ public class SearchInfo {
     }
 
     public int getTotalScore(Board board){
+        // 각 board 에 해당하는 점수를 추출
         int sum=0;
 
         sum+= category.getScore(board.getGroupId());

@@ -87,10 +87,10 @@
                                                     aria-label="Example select with button addon"
                                                     name="sort">
 
-                                                <option value="">정렬</option>
-                                                <option value="createdDateDESC">최근 순</option>
-                                                <option value="createdDateASC">오래된 순</option>
-                                                <option value="viewCnt">조회수 순</option>
+                                                <option class="sortTag" value="">정렬</option>
+                                                <option class="sortTag" value="createdDateDESC">최근 순</option>
+                                                <option class="sortTag" value="createdDateASC">오래된 순</option>
+                                                <option class="sortTag" value="viewCnt">조회수 순</option>
 
                                             </select>
                                         </div>
@@ -118,7 +118,7 @@
                                     <%--                                    필터 2: input 영역--%>
                                     <div class="col-6 p-0">
                                         <div id="content d-flex w-100">
-                                            <input id="filterInput" name="" class="form-control input" type="search"
+                                            <input id="filterInput" name="title" class="form-control input" type="search"
                                                    placeholder="Search" aria-label="Search">
                                         </div>
                                     </div>
@@ -212,8 +212,10 @@
                             <h5 class="card-title">${item.subTitle} <c:if test="${item.newArticle}"><img
                                     src="https://img.icons8.com/office/16/null/new.png"/></c:if></h5>
                             <p class="card-text p-0 m-0 text-align">
-                                조회수: ${item.viewCnt}
+                                  작성자: ${item.name} &nbsp 조회수: ${item.viewCnt}
                             </p>
+<%--                            <p class="card-text p-0 m-0 text-align">--%>
+<%--                            </p>--%>
                             <input type="checkbox" class="btn-check" name="options" id="${item.id}">
                             <label class="btn btn-outline-danger p-0 d-flex justify-content-center align-items-center"
                                    for="${item.id}">😍</label>
@@ -228,8 +230,8 @@
 
 
 <!-- pagination 시작 -->
-<section>
-    <div class="container mt-3">
+<section id="page">
+    <div class="container mt-3" id="paging">
         <ul class="pagination justify-content-center">
             <c:if test="${not pageMaker.first}">
                 <li class="page-item"><a id="prevPage" class="page-link" href="">이전</a></li>
@@ -254,12 +256,22 @@
 <!-- footer 종료 -->
 
 <script>
-    function checkEmpty(){
+    function checkRecommendPage(){
         let param = document.getElementById('param').textContent;
+
         if(param === 'recommend') {
             let explain = document.getElementById('explain');
             explain.style.display='block';
+
+            let sortTag = document.querySelectorAll('.sortTag');
+            for (const tag of [...sortTag]) tag.disabled = true;
+
+            let paging = document.getElementById('paging');
+            paging.style.display='none';
         }
+
+
+
     }
     function showImage() {
         const $thumbList = document.querySelectorAll('img[data-item-id]');
@@ -304,7 +316,7 @@
             .then(checkedIdList => {
                 for (let boardId of [...checkedIdList]) {
                     let board = document.getElementById(boardId);
-                    board.checked = true;
+                    if(board != null) board.checked = true;
                 }
             })
     }
@@ -342,7 +354,7 @@
         }
     }
     (function () {
-        checkEmpty();
+        checkRecommendPage();
         choiceBoard();
         showImage();
         checkedChoiceButton();

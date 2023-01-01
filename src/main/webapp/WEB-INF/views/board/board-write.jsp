@@ -95,10 +95,10 @@
                     <input type="range" value="${boardSaveForm.price}" min="0" max="100000" step="1000" class="slider"
                            id="myRange">
                 </ul>
-                <input id="value" name="price" type="text" class="form-control"
+                <input id="value" name="price" type="number" class="form-control"
                        aria-label="Text input with segmented dropdown button">
             </div>
-            <p class="explain ps-2"> 버튼을 눌러 대략적인 평균 금액을 설정하세요</p>
+            <p class="explain ps-2"> 버튼을 눌러 음식 평균 금액을 설정하세요</p>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default2">상세 위치</span>
@@ -116,7 +116,9 @@
             <button id="subButton" type="submit" class="btn btn-primary">글등록</button>
         </div>
     </div>
-    <input type="hidden" name="groupId" value="${groupId}">
+    <div>${boardSaveForm.groupId}</div>
+
+    <input type="hidden" name="groupId" value="${boardSaveForm.groupId}">
 </form>
 <%--</spring:hasBindErrors>--%>
 
@@ -192,8 +194,8 @@ CKEDITOR.replace('content',
     }
 
     function slider() {
-        var slider = document.getElementById("myRange");
-        var output = document.getElementById("value");
+        let slider = document.getElementById("myRange");
+        let output = document.getElementById("value");
         output.value = slider.value;
 
         slider.oninput = function () {

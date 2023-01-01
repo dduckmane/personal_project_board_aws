@@ -8,10 +8,12 @@ import com.project.board.domain.member.domain.Member;
 import com.project.board.domain.member.domain.searchInfo.SearchInfo;
 import com.project.board.domain.member.repository.SearchInfoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +24,8 @@ import static com.project.board.domain.board.boardConst.BoardConst.RECOMMEND;
 
 @Component
 @RequiredArgsConstructor
+@Transactional
+@Slf4j
 /**
  * 추천 페이지 관련 adapter
  **/
@@ -41,31 +45,38 @@ public class SearchByRecommendAdapter implements findQueryAdapter{
     }
 
     @Override
-    public Page<Board> handle(Object param, Member user, BoardSearchCondition searchCondition, Pageable pageable) {
+    public Page<Board> handle(
+            Object param
+            , Member user
+            , BoardSearchCondition searchCondition
+            , Pageable pageable
+    ) {
         // 회원의 검색 정보를 가져온다.
-        SearchInfo searchInfo = searchInfoRepository.findSearchInfoByMember(user).orElseThrow();
+        SearchInfo searchInfo = searchInfoRepository
+                .findSearchInfoByMember(user.getId())
+                .orElseThrow();
         //하기전 list 를 비움
         recommendListDtos.clear();
 
-        Page<Board> boards = boardRepository.searchAll(searchCondition, pageable);
-        List<Board> content = boards.getContent();
+        List<Board> content = boardRepository
+                .searchAll(searchCondition, pageable)
+                .getContent();
 
         content.stream().forEach(board -> {
             //각 board 의 점수를 환산
             int totalScore = searchInfo.getTotalScore(board);
-
-            //환산한 board 의 점수와 board 를 list 에 담음
+            //환산한 board 의 점수와 board 를 list 에 담음 * 점수가 2점 이상인 board 만 추출
             if(totalScore>=2) recommendListDtos.add(new RecommendListDto(totalScore,board));
         });
-        // 점수 바탕으로 정렬
+        // 점수 바탕으로 정렬 CompareTo OverRiding
         Collections.sort(recommendListDtos);
 
-        //새로운 page 객체를 만듦
+        //새로운 page 객체를 만듦, Max 12
         List<Board> result = recommendListDtos
-                .stream()
+                .stream().limit(12)
                 .map(RecommendListDto::getBoard)
                 .collect(Collectors.toList());
 
-        return new PageImpl<>(result,pageable,boards.getTotalElements());
+        return new PageImpl<>(result, pageable, result.size());
     }
 }
