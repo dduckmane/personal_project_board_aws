@@ -49,25 +49,34 @@
     : 회원의 검색 정보들을 각각의 종류별로 임베디드 타입으로 Search Info 테이블에 저장된다.
   - AddCnt 라는 adapter interface 생성
     https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/AddCnt.java
+    
     : 회원이 검색한 정보를 바탕으로 횟수와 내용을 저장한다.
     
-    - 어뎁터 예시_1
+    - 어뎁터 예시_1 : 회원이 검색한 필터 조건을 저장한다.
       https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/TagCnt.java  
     - 어텝터 예시_2
       : 회원의 검색한 내용을 리스트로 반환하여 검색한 횟수를 저장한다.
       https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/NameInfoAdd.java
       
   - SearchByRecommendAdapter 를 생성
-  
+                   https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/adapter/SearchByRecommendAdapter.java
     - 회원이 추천 페이지를 요청하면 회원의 searchinfo 테이블을 바탕으로 각 board 의 점수를 환산
     - 높은 점수별로 환산을 한 후에 상위 12개를 회원에게 보여준다.
+
+### 2) JavaScript 를 이용하여 원격 API 호출을 한다.
+
+![스크린샷 2023-01-01 오후 10 56 25](https://user-images.githubusercontent.com/108928206/210173097-e9dafb2d-f252-44e5-a792-21d4b546fa2d.png)  
+
+  - 예시_1: 
+    - 맛집 리스트 페이지에 썸네일을 JavaScript 의 fetch를 이용하여 rest api 를 호출한다.
+    - response data 의 image 를 blob 타입으로 받는다.
+    - 리스트들의 img 부분을 querySelectorAll를 이용해서 유사배열을 받아 배열로 변경후
+    - src 속성값을 변경한다.
     
-    
-  
-  
-  
-  
-  
+### 3) Bootstrap 의 grid 시스템을 사용한다.
+
+### 4) 검색 정보 수집과 리스트 페이지에 Adapter 패턴을 적용한다.
+
 
 
 ## 4. 개선 사항
