@@ -19,6 +19,8 @@
 - DDD 방식을 적용한다.
 - 검색 정보 수집과 리스트 페이지에 Adapter 패턴을 적용한다.
 - 찜 기능을 개발한다.
+- Custom File Utils 를 제작한다.
+- @PostConstruct 와 @ModelAttribute 로 불필요하 리소스 소모 방지
 
 
 
@@ -150,6 +152,13 @@
         
       </div>
       </details>
+
+### 5) Custom File Utils 제작
+  
+  - 
+
+
+### 6) @ModelAttribute 와 @PostConstruct 로 불필요한 리소스 소모 방지
 
 
 
