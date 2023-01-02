@@ -141,7 +141,7 @@ https://github.com/dduckmane/personal_project_board_aws/tree/master/src/main/jav
       </div>
       </details>
   
-  - 리스트를 담당하는 controller에 적용
+ - 리스트를 담당하는 controller에 적용
   
       <details>
       <summary>코드 링크</summary>
