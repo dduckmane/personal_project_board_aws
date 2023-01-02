@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
-
+/**
+ * 참고 깃허브 : https://github.com/dduckmane/-Springboot-Security-OAuth2.0-V3
+ * */
 
 @Service
 @Slf4j
