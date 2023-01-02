@@ -15,7 +15,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-
+/**
+ * 참고 velog : https://velog.io/@joon1106/CKeditor4-사용사진-업로드
+ * 위의 코드와 Custom File Utils 접목
+ * */
 @Controller
 @Slf4j
 public class UploadApiController {
