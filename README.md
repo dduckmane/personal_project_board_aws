@@ -112,6 +112,45 @@
 
 ### 4) 검색 정보 수집과 리스트 페이지에 Adapter 패턴을 적용한다.
 
+  - 리스트 페이지에 맞는 adapter인 findQueryAdapter 개발
+      <details>
+      <summary>코드 링크</summary>
+      <div markdown="1">
+                   https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/adapter/findQueryAdapter.java
+        
+      </div>
+      </details>
+  - 카테고리 adater, 찜 목록 adapter, 추천 페이지 adapter 를 생성
+
+      <details>
+      <summary>코드 링크</summary>
+      <div markdown="1">
+                   
+https://github.com/dduckmane/personal_project_board_aws/tree/master/src/main/java/com/project/board/domain/board/controller/adapter
+        
+      </div>
+      </details>
+
+  - adapterHandler인 QueryAdapterHandler 생성
+  
+      <details>
+      <summary>코드 링크</summary>
+      <div markdown="1">
+                   https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/QueryAdapterHandler.java
+        
+      </div>
+      </details>
+  
+  - 리스트를 담당하는 controller에 적용
+  
+      <details>
+      <summary>코드 링크</summary>
+      <div markdown="1">
+                   https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/BoardController.java
+        
+      </div>
+      </details>
+
 
 
 ## 4. 개선 사항
