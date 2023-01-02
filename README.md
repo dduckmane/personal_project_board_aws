@@ -112,7 +112,7 @@
     
 ### 3) Bootstrap 의 grid 시스템을 사용한다.
 
-### 4) 검색 정보 수집과 리스트 페이지에 Adapter 패턴을 적용한다.
+### 4) 리스트 페이지에 Adapter 패턴을 적용하여 확장성과 유지보수성을 증가시킨다.
 
   - 리스트 페이지에 맞는 adapter인 findQueryAdapter 개발
       <details>
