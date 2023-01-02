@@ -155,11 +155,40 @@
 
 ### 5) Custom File Utils 제작
   
-  - 
+  - 날짜별 폴더를 생성하고 고유한 이름을 생성해주는 custom file utils 생성
+
+      <details>
+      <summary>코드 링크</summary>
+      <div markdown="1">
+      
+      (https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/global/util/FileUtils.java)
+        
+      </div>
+      </details>
 
 
 ### 6) @ModelAttribute 와 @PostConstruct 로 불필요한 리소스 소모 방지
 
+  - 계속해서 model 에 담겨야 하는 데이터들을 @PostConstruct를 이용하여 의존성 주입이 이루어진 후 초기화를 시켜서 성능 최적화를 시킨다.
+
+      <details>
+      <summary>코드 링크_1</summary>
+      <div markdown="1">
+                  
+        https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/init/BoardInit.java
+        
+      </div>
+      </details>
+      
+       <details>
+      <summary>코드 링크_2</summary>
+      <div markdown="1">
+                  
+        https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/BoardController.java
+        
+      </div>
+      </details>
+      
 
 
 ## 4. 개선 사항
