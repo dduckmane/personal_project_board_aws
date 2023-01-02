@@ -128,8 +128,8 @@
       <summary>코드 링크</summary>
       <div markdown="1">
 
-  https://github.com/dduckmane/personal_project_board_aws/tree/master/src/main/java/com/project/board/domain/board/controller/adapter
-        
+      https://github.com/dduckmane/personal_project_board_aws/tree/master/src/main/java/com/project/board/domain/board/controller/adapter
+       
       </div>
       </details>
 
