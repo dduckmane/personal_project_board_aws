@@ -176,7 +176,7 @@
       <summary>코드 링크_1</summary>
       <div markdown="1">
                   
-        https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/init/BoardInit.java
+      https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/init/BoardInit.java
         
       </div>
       </details>
@@ -185,7 +185,7 @@
       <summary>코드 링크_2</summary>
       <div markdown="1">
                   
-        https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/BoardController.java
+      https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/BoardController.java
         
       </div>
       </details>
