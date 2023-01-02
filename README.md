@@ -21,6 +21,7 @@
 - 찜 기능을 개발한다.
 - Custom File Utils 를 제작한다.
 - @PostConstruct 와 @ModelAttribute 로 불필요하 리소스 소모 방지
+- 3단 validation 을 구현한다. 클라이언트, 서버, DB
 
 
 
