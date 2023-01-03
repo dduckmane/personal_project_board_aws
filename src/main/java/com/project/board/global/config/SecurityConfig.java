@@ -19,7 +19,6 @@ public class SecurityConfig{
 
     @Bean//스프링 필터에 이 빈을 등록
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable();
         httpSecurity
                 .logout()
                 .and()
