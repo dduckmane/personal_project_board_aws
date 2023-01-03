@@ -1,4 +1,4 @@
-# 맛집 커뮤니티 사이트
+# 😊. 맛집 커뮤니티 사이트 
 <img width="500" alt="스크린샷 2023-01-03 오후 12 40 14" src="https://user-images.githubusercontent.com/108928206/210297422-8044a640-38cb-4647-a7db-ece79a2893e8.png">
 
 - Demo : http://ec2-43-201-132-89.ap-northeast-2.compute.amazonaws.com
@@ -12,7 +12,7 @@
 
 
 ## 1. 설명 및 목적
-### 1) 설명: 사람들이 편리하게 맛집을 찾을 수 있도록 도와주는 커뮤니티 사이트입니다.
+### 1) 설명: 사람들이 편리하게 맛집을 찾을 수 있도록 도와주고 서로 소통하는 커뮤니티 사이트입니다.
 ### 2) 목적
 - 비지니스적인 목적보다는 개인 학습 목표의 개인 프로젝트 입니다.
 - 맞춤 추천 알고리즘을 개발한다.
@@ -24,10 +24,6 @@
 - Custom File Utils 를 제작한다.
 - @PostConstruct 와 @ModelAttribute 로 불필요하 리소스 소모 방지
 - 배포 쉘 스크립트를 작성한다.
-
-
-
-
 
 ## 2. 사용 기술
 ### 1) Back-End
@@ -60,6 +56,8 @@
     
     : 회원의 검색 정보들을 각각의 종류별로 임베디드 타입으로 Search Info 테이블에 저장된다.
   - AddCnt 라는 adapter interface 생성
+
+    : 회원들의 검색 내용 바탕으로 검색 횟 수를 증가시키는 기능
     <details>
     <summary>코드 링크</summary>
     <div markdown="1">
@@ -68,9 +66,7 @@
     </div>
     </details>
     
-    : 회원이 검색한 정보를 바탕으로 내용고 횟수를 저장한다.
-    
-    - 어뎁터 예시_1 : 회원이 검색한 필터 조건을 저장한다.
+    - 어뎁터 예시_1 : 회원이 검색한 필터 조건을 저장하고 검색 횟 수를 저장한다.
     
         <details>
         <summary>코드 링크</summary>
@@ -122,7 +118,7 @@
 
 <img width="816" alt="스크린샷 2023-01-03 오후 12 56 21" src="https://user-images.githubusercontent.com/108928206/210298512-bd621d36-dfdd-4d73-b05b-44a343cef09d.png">
 
-  - 리스트 페이지에 맞는 adapter인 findQueryAdapter 개발
+  - 리스트 페이지에 맞는 adapter인 findQueryAdapter interface 생성
       <details>
       <summary>코드 링크</summary>
       <div markdown="1">
