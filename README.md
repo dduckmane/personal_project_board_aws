@@ -62,7 +62,7 @@
     : 회원의 검색 정보들을 각각의 종류별로 임베디드 타입으로 Search Info 테이블에 저장된다.
   - AddCnt 라는 adapter interface 생성
 
-    : 회원들의 검색 내용 바탕으로 검색 횟 수를 증가시키는 기능
+    : 회원들의 검색 내용 바탕으로 내용을 저장하고 내용별 검색 횟 수를 증가시킨다.
     <details>
     <summary>코드 링크</summary>
     <div markdown="1">
