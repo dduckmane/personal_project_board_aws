@@ -6,13 +6,17 @@
 
 ## 목차
 
-1. [설명 및 목적](#1장.-설명-및-목적)
-2. [사용 기술](#2.-사용-기술)
-3. [Advanced Feature](#3.-Advanced-Feature)
-4. [개선 사항](#4.-개선-사항)
+[1. 설명 및 목적](#설명-및-목적)
+
+[2. 사용 기술](#사용-기술)
+
+[3. Advanced Feature](#advanced-feature)
+
+[4. 개선 사항](#개선-사항)
 
 
-## 1장. 설명 및 목적
+## 설명 및 목적
+
 ### 1) 설명: 사람들이 편리하게 맛집을 찾을 수 있도록 도와주고 서로 소통하는 커뮤니티 사이트입니다.
 ### 2) 목적
 - 비지니스적인 목적보다는 개인 학습 목표의 개인 프로젝트 입니다.
@@ -26,7 +30,7 @@
 - @PostConstruct 와 @ModelAttribute 로 불필요하 리소스 소모 방지
 - 배포 쉘 스크립트를 작성한다.
 
-## 2. 사용 기술
+## 사용 기술
 ### 1) Back-End
   - Java 11, Spring Framework 2.7.7, Spring boot, RESTFUL API, QueryDsl 5.0.0, Spring Data Jpa 2.7.6, JPQL, JSTL, Spring Security 5.7.6
 ### 2) Server
@@ -44,7 +48,7 @@
 ### 8) Test
   - junit5, AssertJ Library
 
-## 3. Advanced Feature
+## Advanced Feature
 ### 1) 맞춤 추천 알고리즘 개발
   
   - SearchInfo Entity를 생성 
@@ -198,4 +202,4 @@
       
 
 
-## 4. 개선 사항
+## 개선 사항
