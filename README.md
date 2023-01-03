@@ -120,7 +120,7 @@
 
 ### 4) 리스트 페이지에 Adapter 패턴을 적용하여 확장성과 유지보수성을 증가시킨다.
 
-![image](https://user-images.githubusercontent.com/108928206/210298284-b4c72420-40bd-45b0-ab9f-4265952e2363.png)
+<img width="816" alt="스크린샷 2023-01-03 오후 12 56 21" src="https://user-images.githubusercontent.com/108928206/210298512-bd621d36-dfdd-4d73-b05b-44a343cef09d.png">
 
   - 리스트 페이지에 맞는 adapter인 findQueryAdapter 개발
       <details>
