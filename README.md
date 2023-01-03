@@ -72,7 +72,8 @@
     </details>
     
     - 어뎁터 예시_1 : 회원이 검색한 필터 조건을 저장하고 검색 횟 수를 저장한다.
-    
+    <img width="700" alt="스크린샷 2023-01-03 오후 2 28 36" src="https://user-images.githubusercontent.com/108928206/210304308-e5eff413-796d-4b65-9301-5f3ef14ac49f.png">
+
         <details>
         <summary>코드 링크</summary>
         <div markdown="1">
@@ -83,6 +84,8 @@
         
     - 어텝터 예시_2
       : 회원의 검색한 내용을 공백을 제거한 단어들을 리스트로 반환하여 검색한 내용과 횟수를 저장한다.
+      <img width="714" alt="스크린샷 2023-01-03 오후 2 29 39" src="https://user-images.githubusercontent.com/108928206/210304370-905c17bf-83ed-4b08-80b4-a89fb3d7b086.png">
+
       
       <details>
       <summary>코드 링크</summary>
