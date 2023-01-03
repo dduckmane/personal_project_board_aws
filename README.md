@@ -1,5 +1,5 @@
 # 맛집 커뮤니티 사이트
-<img width="463" alt="스크린샷 2023-01-03 오후 12 40 14" src="https://user-images.githubusercontent.com/108928206/210297422-8044a640-38cb-4647-a7db-ece79a2893e8.png">
+<img width="500" alt="스크린샷 2023-01-03 오후 12 40 14" src="https://user-images.githubusercontent.com/108928206/210297422-8044a640-38cb-4647-a7db-ece79a2893e8.png">
 
 - Demo : http://ec2-43-201-132-89.ap-northeast-2.compute.amazonaws.com
 
@@ -115,9 +115,12 @@
     
 ### 3) Bootstrap 의 grid 시스템을 사용한다.
 
-<img width="100" alt="스크린샷 2023-01-03 오후 12 50 52" src="https://user-images.githubusercontent.com/108928206/210297938-e5cbfb4f-5e6c-4d86-9629-5753aaace460.png">
+<img width="507" alt="스크린샷 2023-01-03 오후 12 58 47" src="https://user-images.githubusercontent.com/108928206/210298412-7ddbae54-7884-4880-9092-541a846f923c.png">
+
 
 ### 4) 리스트 페이지에 Adapter 패턴을 적용하여 확장성과 유지보수성을 증가시킨다.
+
+![image](https://user-images.githubusercontent.com/108928206/210298284-b4c72420-40bd-45b0-ab9f-4265952e2363.png)
 
   - 리스트 페이지에 맞는 adapter인 findQueryAdapter 개발
       <details>
