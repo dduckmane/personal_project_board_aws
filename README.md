@@ -115,7 +115,7 @@
     
 ### 3) Bootstrap 의 grid 시스템을 사용한다.
 
-
+<img width="100" alt="스크린샷 2023-01-03 오후 12 50 52" src="https://user-images.githubusercontent.com/108928206/210297938-e5cbfb4f-5e6c-4d86-9629-5753aaace460.png">
 
 ### 4) 리스트 페이지에 Adapter 패턴을 적용하여 확장성과 유지보수성을 증가시킨다.
 
