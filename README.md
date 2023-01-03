@@ -79,8 +79,8 @@
         <div markdown="1">
       https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/TagCnt.java  
 
-        </div>
-        </details>
+       </div>
+       </details>
         
     - 어텝터 예시_2
       : 회원의 검색한 내용에서 공백을 제거한 단어들을 리스트로 반환하여 검색한 내용과 횟수를 저장한다.
