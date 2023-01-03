@@ -72,7 +72,8 @@
     </details>
     
     - 어뎁터 예시_1 : 회원이 검색한 필터 조건을 저장하고 검색 횟 수를 저장한다.
-    <img width="700" alt="스크린샷 2023-01-03 오후 2 28 36" src="https://user-images.githubusercontent.com/108928206/210304308-e5eff413-796d-4b65-9301-5f3ef14ac49f.png">
+    
+      <img width="700" alt="스크린샷 2023-01-03 오후 2 28 36" src="https://user-images.githubusercontent.com/108928206/210304308-e5eff413-796d-4b65-9301-5f3ef14ac49f.png">
 
        <details>
         <summary>코드 링크</summary>
