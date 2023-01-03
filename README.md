@@ -1,4 +1,6 @@
 # 맛집 커뮤니티 사이트
+<img width="463" alt="스크린샷 2023-01-03 오후 12 40 14" src="https://user-images.githubusercontent.com/108928206/210297422-8044a640-38cb-4647-a7db-ece79a2893e8.png">
+
 - Demo : http://ec2-43-201-132-89.ap-northeast-2.compute.amazonaws.com
 
 ## 목차
@@ -112,6 +114,8 @@
     - src 속성값을 변경한다.
     
 ### 3) Bootstrap 의 grid 시스템을 사용한다.
+
+
 
 ### 4) 리스트 페이지에 Adapter 패턴을 적용하여 확장성과 유지보수성을 증가시킨다.
 
