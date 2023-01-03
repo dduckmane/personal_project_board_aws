@@ -1,7 +1,8 @@
 # 😊. 맛집 커뮤니티 사이트 
-<img width="500" alt="스크린샷 2023-01-03 오후 12 40 14" src="https://user-images.githubusercontent.com/108928206/210297422-8044a640-38cb-4647-a7db-ece79a2893e8.png">
 
 - Demo : http://ec2-43-201-132-89.ap-northeast-2.compute.amazonaws.com
+
+<img width="500" alt="스크린샷 2023-01-03 오후 12 40 14" src="https://user-images.githubusercontent.com/108928206/210297422-8044a640-38cb-4647-a7db-ece79a2893e8.png">
 
 ## 목차
 
@@ -97,6 +98,7 @@
       </div>
       </details>
     - 회원이 추천 페이지를 요청하면 회원의 searchinfo 테이블을 바탕으로 각 board 의 점수를 환산
+    
     - 높은 점수별로 환산을 한 후에 상위 12개를 회원에게 보여준다.
 
 ### 2) JavaScript 를 이용하여 원격 API 호출을 한다.
