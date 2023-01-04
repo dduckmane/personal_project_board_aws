@@ -81,7 +81,7 @@
     <img width="700" alt="스크린샷 2023-01-03 오후 2 28 36" alt="스크린샷 2023-01-03 오후 6 47 50" src="https://user-images.githubusercontent.com/108928206/210333645-c956d8d0-92d9-49d6-b8d2-8eebf6a7d5e6.png">
         
        <details>
-        <summary>코드 링크</summary>
+        <summary>예시_1 코드 링크</summary>
         <div markdown="1">
       https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/TagCnt.java  
 
@@ -94,7 +94,7 @@
 
       
       <details>
-      <summary>코드 링크</summary>
+      <summary>예시_2 코드 링크</summary>
       <div markdown="1">
         https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/NameInfoAdd.java
       </div>
