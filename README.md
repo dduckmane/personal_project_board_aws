@@ -83,7 +83,8 @@
        <details>
         <summary>예시_1 코드 링크</summary>
         <div markdown="1">
-      https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/member/domain/searchInfo/searchCnt/TagCnt.java  
+      
+          https://github.com/dduckmane/personal_project_board_aws/blob/master/src/main/java/com/project/board/domain/board/controller/adapter/SearchByRegionAdapter.java
 
        </div>
        </details>
