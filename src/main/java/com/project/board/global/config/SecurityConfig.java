@@ -23,6 +23,7 @@ public class SecurityConfig{
         httpSecurity.csrf()
                 .ignoringAntMatchers("/api/**")
                 .ignoringAntMatchers("/user/**")
+                .ignoringAntMatchers("/food/**")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         ;
         httpSecurity
