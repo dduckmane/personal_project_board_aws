@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity//스프링 시큐리티 필터가 스프링 필터체인에 등록이 된다.
@@ -19,7 +20,10 @@ public class SecurityConfig{
 
     @Bean//스프링 필터에 이 빈을 등록
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable();
+        httpSecurity.csrf()
+                .ignoringAntMatchers("/api/**")
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        ;
         httpSecurity
                 .logout()
                 .and()
@@ -33,8 +37,6 @@ public class SecurityConfig{
                 .loginPage("/login")
                 .userInfoEndpoint()
                 .userService(userService)
-
-
         ;
         return httpSecurity.build();
     }
