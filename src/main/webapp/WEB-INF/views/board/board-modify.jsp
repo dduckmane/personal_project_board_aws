@@ -129,7 +129,7 @@
 <script type="text/javascript">    // 글쓰기 editor 및 사진 업로드 기능
 CKEDITOR.replace('content',
     {
-        filebrowserUploadUrl: '/user/food/imageUpload.do'
+        filebrowserUploadUrl: '/food/imageUpload.do'
     });
 </script>
 <script type="text/javascript"
