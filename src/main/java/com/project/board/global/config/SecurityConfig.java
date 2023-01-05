@@ -22,6 +22,7 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf()
                 .ignoringAntMatchers("/api/**")
+                .ignoringAntMatchers("/user/**")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         ;
         httpSecurity
