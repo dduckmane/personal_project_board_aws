@@ -121,6 +121,7 @@
 
 ### 2) JavaScript 를 이용하여 원격 API 호출을 한다.
 
+ex) 썸네일 호출
 ![스크린샷 2023-01-01 오후 10 56 25](https://user-images.githubusercontent.com/108928206/210173097-e9dafb2d-f252-44e5-a792-21d4b546fa2d.png)  
 
   - 예시_1: 
