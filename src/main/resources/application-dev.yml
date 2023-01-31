@@ -53,7 +53,7 @@ spring:
           kakao:
             client-id: fa3a945946b115e5706faa5317e23786
             client-secret: jU7yRoeWOe9I6jQ8nEHXwd7DQsZNZJpX
-            redirect-uri: http://www.matjip.site/login/oauth2/code/kakao
+            redirect-uri: http://matjip.site/login/oauth2/code/kakao
             client-name: kakao
             authorization-grant-type: authorization_code
             client-authentication-method: POST
