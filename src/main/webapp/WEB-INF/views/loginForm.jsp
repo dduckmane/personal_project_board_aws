@@ -47,16 +47,16 @@
                     </a>
                 </div>
 
-                <div class="col-12 d-flex justify-content-center align-items-center">
-                    <a href="/oauth2/authorization/google">
-                        <img height="70px" width="340px" src="https://developers.google.com/static/identity/images/btn_google_signin_light_normal_web.png?hl=ko"/>
-                    </a>
-                </div>
+<%--                <div class="col-12 d-flex justify-content-center align-items-center">--%>
+<%--                    <a href="/oauth2/authorization/google">--%>
+<%--                        <img height="70px" width="340px" src="https://developers.google.com/static/identity/images/btn_google_signin_light_normal_web.png?hl=ko"/>--%>
+<%--                    </a>--%>
+<%--                </div>--%>
 
-                <div id="naver" class="col-12 d-flex justify-content-center align-items-center">
-                    <a href="/oauth2/authorization/naver" class="h-100 w-100">
-                    </a>
-                </div>
+<%--                <div id="naver" class="col-12 d-flex justify-content-center align-items-center">--%>
+<%--                    <a href="/oauth2/authorization/naver" class="h-100 w-100">--%>
+<%--                    </a>--%>
+<%--                </div>--%>
                 <div class="text-center py-10 font-monospace">
                     <h6 class="mt-3 font-monospace fst-italic" style="color:#858282;">1초 회원가입하고 바로 로그인하세요</h6>
                 </div>

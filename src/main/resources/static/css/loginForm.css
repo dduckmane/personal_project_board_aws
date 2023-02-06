@@ -51,7 +51,9 @@ h3,
 .divider {
     width: 20%;
     margin: 10px 1rem 7rem;
-    border-top: 0.5rem solid rgb(176, 255, 189);
+    border-top: 0.5rem solid rgb(252, 228, 216);
+    box-shadow: 1px 3px 3px 1px gray;
+
 }
 
 #top .welcome {
