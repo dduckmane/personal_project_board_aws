@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 /**
- * 참고 깃허브 : https://github.com/dduckmane/-Springboot-Security-OAuth2.0-V3
+ * 참고 깃허브 : https://github.com/codingspecialist/-Springboot-Security-OAuth2.0-V3
  * */
 
 @Service
@@ -54,7 +54,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String provider = oauth2UserInfo.getProvider();
         String providerId = oauth2UserInfo.getProviderId();
         String username=provider+"_"+providerId;
-        String password= encoder.encode("겟인데어");
+        String password= encoder.encode("비밀번호");
         String email = oauth2UserInfo.getEmail();
         String role="ROLE_USER";
         String name=oauth2UserInfo.getName();
