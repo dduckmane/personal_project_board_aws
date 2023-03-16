@@ -18,19 +18,20 @@
 
 ## ERD
 
-<img width="966" alt="스크린샷 2023-01-03 오후 3 48 41" src="https://user-images.githubusercontent.com/108928206/210311258-34496252-5668-481e-98d9-268dc61c7a24.png">
+<img width="958" alt="image" src="https://user-images.githubusercontent.com/108928206/225642540-6594f43c-c5c3-4925-92a1-9761376663b0.png">
+
+ErdCloud : https://www.erdcloud.com/d/Y7epHbrf8qXS7qFtb
 
 ## 설명 및 목적
 
-### 1) 설명: 사람들이 편리하게 맛집을 찾을 수 있도록 도와주고 서로 소통하는 커뮤니티 사이트입니다.
+### 1) 설명: 사용자들이 서로 맛집을 공유하고 사용자의 검색기록을 바탕으로 유저에게 맞춤 추천을 해주는 커뮤니티 사이트 입니다.
 ### 2) 목적
-- 비지니스적인 목적보다는 개인 학습 목표의 개인 프로젝트 입니다.
 - 맞춤 추천 알고리즘을 개발한다.
 - JavaScript 를 이용하여 원격 API 호출을 한다.
+- 소셜 로그인 기능 과 찜 기능을 개발
 - Bootstrap 의 grid 시스템을 사용한다.
 - DDD 방식을 적용한다.
 - 검색 정보 수집과 리스트 페이지에 Adapter 패턴을 적용한다.
-- 찜 기능을 개발한다.
 - Custom File Utils 를 제작한다.
 - @PostConstruct 와 @ModelAttribute 로 불필요하 리소스 소모 방지
 - 배포 쉘 스크립트를 작성한다.
@@ -52,6 +53,20 @@
   - Gradle 7.6
 ### 8) Test
   - junit5, AssertJ Library
+
+## 서버구축
+
+1. AWS-EC2에 인스턴스를 생성 Apache - tomcat 과 git 을 설치
+2. server.xml 에서 포트번호를 기본 http 포트번호로 수정
+    
+    <img width="551" alt="image" src="https://user-images.githubusercontent.com/108928206/225644506-d3a252e2-e78b-40a8-9c16-07fa1b19ff85.png">
+
+1. git 을 통해 프로젝트를 불러와 war 파일을 생성
+2. tomcat 의 webapps 디렉토리로 이동시켜 배포
+    
+  <img width="593" alt="image" src="https://user-images.githubusercontent.com/108928206/225644607-94edb8e4-c52f-4af1-8fb6-1233dffe5dd3.png">
+
+- DB관련 내용은 보안상 기재 x
 
 ## Advanced Feature
 ### 1) 맞춤 추천 알고리즘 개발
@@ -215,7 +230,27 @@ ex) 썸네일 호출
         
       </div>
       </details>
+
+### 7) 소셜 로그인 기능을 구현
+설명: 네이버, 카카오, 구글 로그인 기능을 구현한다.
+
+- 구글은 https에서만 가능하기에 로컬에서만 구현
+- 네이버는 검수 요청을 보냈으나 포트폴리오 용도라는 이유로 검수 거부
+- 카카오만 현재 가능
+
+참고 url : https://github.com/codingspecialist/-Springboot-Security-OAuth2.0-V3
+
+1) `.antMatchers("/user/**").authenticated().anyRequest().permitAll()`
+
+: 로그인 한 유저만 볼 수 있는 url 은 /user/** 로 설정
+
+2) Authorization Code Grant Type 방식로 진행
+
+
+### 8) 배포 쉘 스크립트를 작성
       
+<img width="1439" alt="image" src="https://user-images.githubusercontent.com/108928206/225643872-9218c569-b1f2-403e-9d27-05b83e42957d.png">
+
 
 
 ## 개선 사항
