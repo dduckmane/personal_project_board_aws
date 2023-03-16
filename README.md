@@ -1,6 +1,6 @@
 # 😊. 맛집 커뮤니티 사이트 
 
-- Demo : http://ec2-43-201-132-89.ap-northeast-2.compute.amazonaws.com
+- Demo : http://matjip.online
 
 <img width="500" alt="스크린샷 2023-01-03 오후 12 40 14" src="https://user-images.githubusercontent.com/108928206/210297422-8044a640-38cb-4647-a7db-ece79a2893e8.png">
 
